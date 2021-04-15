@@ -252,6 +252,21 @@ select.form-control:focus{border-color: #3f51b5 !important;box-shadow: inset 0 1
 .signup-link span a {color: rgb(63,81,181);font-weight:bold;font-size: 14px;}
 .signup-link span a:hover {color: #5d6dca;}
 
+/* Login-Material
+--------------------------------------------------------------------------------------------------------*/
+.wrapper .MuiGrid-root .login-left{height: auto;}
+.login-content .MuiFormLabel-root{font-family: "Raleway";color:#495057;transform: translate(20px, 16px) scale(1);}
+.MuiFormControl-root .MuiFilledInput-root:hover {background-color: #fff;}
+.MuiFormControl-root .MuiFilledInput-underline:before,.MuiFormControl-root .MuiFilledInput-underline:after{border-bottom:none;}
+.MuiFormControl-root .MuiFilledInput-underline:hover:before {border-bottom: none;}
+.login-content .MuiInputBase-input:focus{border:1px solid #3f51b5 ;box-shadow: none;border-radius: 2px;background-color: #fff;}
+.login-content .MuiFormGroup-root{margin-bottom: 31px;}
+.MuiFormControl-root .MuiFilledInput-root{height: 48px;background-color: #fff ;border-radius: 2px;border:1px solid #e4e4e4;}
+.MuiButton-contained{box-shadow: none;}
+.login-content .btn-login {font-family:"Raleway";padding: 0 44px;font-weight: bold;font-size: 14px;border-color: #3F51B5;text-transform: uppercase;border-radius: 2px;}
+.login-content .btn-login:hover{background-color: #0f207a;border-color: #0f207a;box-shadow: none;}
+.MuiGrid-root .forgot-password{margin-top: 15PX;}
+
 /* Sidebar
 --------------------------------------------------------------------------------------------------------*/
 .sidebar-list a:active {background-color: #3f51b5;color: #fff;}

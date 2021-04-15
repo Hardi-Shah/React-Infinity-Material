@@ -1,4 +1,5 @@
-import { Button, Form } from "react-bootstrap";
+import { FormGroup, Grid, TextField } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import { Logo } from "../../assets/images";
 
@@ -6,55 +7,57 @@ const Login = () => {
   return (
     <div className="wrapper">
       <main className="main-content">
-        <div className="row">
-          <div className="col-lg-6 col-md-4 login-left">
+        <Grid container>
+          <Grid item xs={12} sm={6} className="login-left">
             <img src={Logo} alt="Infinity" className="img-responsive logo" />
-          </div>
+          </Grid>
 
-          <div className="col-lg-6 col-md-8">
+          <Grid item xs={12} sm={6}>
             <div className="login-right">
               <div className="login-content">
                 <h3 className="login-text">Login</h3>
-                <Form>
-                  <Form.Group>
-                    <Form.Control
-                      type="text"
+                  <FormGroup>
+                    <TextField
                       id="uname"
-                      placeholder="Username"
+                      type="text"
+                      label="Username"
+                      variant="filled"
                     />
-                  </Form.Group>
-                  <Form.Group>
-                    <Form.Control
+                  </FormGroup>
+                  <FormGroup>
+                    <TextField
+                      id="Password"
                       type="password"
-                      id="password"
-                      placeholder="Password"
+                      label="Password"
+                      variant="filled"
                     />
-                  </Form.Group>
-                  <div className="row">
-                    <div className="col-sm-6">
+                  </FormGroup>
+                  <Grid container>
+                    <Grid item xs={12} sm={6}>
                       <Button
                         type="button"
-                        variant="primary"
+                        variant="contained"
+                        color="primary"
                         className="btn-login"
                       >
                         Login
                       </Button>{" "}
-                    </div>
-                    <div className="col-sm-6 forgot-password">
+                    </Grid>
+
+                    <Grid item xs={12} sm={6} className="forgot-password">
                       <Link to="#">Forgot Password?</Link>
-                    </div>
-                  </div>
+                    </Grid>
+                  </Grid>
                   <div className="signup-link">
                     Don't have an account?{" "}
                     <span>
                       <Link to="#">Sign Up</Link>
                     </span>
                   </div>
-                </Form>
               </div>
             </div>
-          </div>
-        </div>
+          </Grid>
+        </Grid>
       </main>
     </div>
   );
