@@ -1,3 +1,11 @@
+import {
+  Badge,
+  Menu,
+  Divider,
+  ListItem,
+  ListItemText,
+} from "@material-ui/core";
+import React from "react";
 import { Dropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import {
@@ -18,6 +26,19 @@ import {
 } from "../../assets/images";
 
 const Header = () => {
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  // const handleUserClick = (event: React.MouseEvent<HTMLElement>) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   function toggleNav() {
     document.getElementById("Sidebar")!.classList.toggle("sidenav-toggle");
     document.getElementById("main")!.classList.toggle("main-toggle");
@@ -40,101 +61,100 @@ const Header = () => {
       </Link>
       <div className="navbar-collapse w-100" id="collapsingNavbar">
         <ul className="navbar-nav ml-auto navbar-user-details">
-          <Dropdown>
-            <Dropdown.Toggle
-              as="li"
-              id="notification-icon"
-              className="nav-item bell-icon"
+          <li
+            id="notification-icon"
+            className="nav-item bell-icon"
+            onClick={handleClick}
+          >
+            <Badge
+              badgeContent={3}
+              color="error"
+              className="notification-bell-badge"
             >
               <img
                 src={NotificationBellIcon}
                 alt="notification-bell"
                 className="bell-logo"
               />
-              <span className="badge notification-badge">3</span>
-            </Dropdown.Toggle>
-            <Dropdown.Menu
-              as="ul"
-              className=" notifications"
-              role="menu"
-              aria-labelledby="dropdownMenu"
-            >
-              <div className="notification-heading">Notifications</div>
-              <ul>
-                <li className="row">
-                  <div className="col-2">
-                    <img
-                      src={UserImage01Icon}
-                      alt="user-01"
-                      className="founder-logo"
-                    />
-                  </div>
-                  <div className="col-10">
-                    <div className="notification-message">
-                      Suzzeth Bungaos tagged you and 18 others in a post
-                    </div>
-                    <div className="notification-time">Oct 3, 2017 9:00 PM</div>
-                  </div>
-                </li>
-                <li className="row">
-                  <div className="col-2">
-                    <img
-                      src={UserImage02Icon}
-                      alt="user-02"
-                      className="founder-logo"
-                    />
-                  </div>
-                  <div className="col-10">
-                    <div className="notification-message">
-                      Suzzeth Bungaos tagged you and 18 others in a post
-                    </div>
-                    <div className="notification-time">Oct 3, 2017 9:00 PM</div>
-                  </div>
-                </li>
-                <li className="row">
-                  <div className="col-2">
-                    <img
-                      src={UserImage03Icon}
-                      alt="user-03"
-                      className="founder-logo"
-                    />
-                  </div>
-                  <div className="col-10">
-                    <div className="notification-message">
-                      Suzzeth Bungaos tagged you and 18 others in a post
-                    </div>
-                    <div className="notification-time">Oct 3, 2017 9:00 PM</div>
-                  </div>
-                </li>
-                <li className="row">
-                  <div className="col-2">
-                    <img
-                      src={UserImage04Icon}
-                      alt="user-04"
-                      className="founder-logo"
-                    />
-                  </div>
-                  <div className="col-10">
-                    <div className="notification-message">
-                      Suzzeth Bungaos tagged you and 18 others in a post
-                    </div>
-                    <div className="notification-time">Oct 3, 2017 9:00 PM</div>
-                  </div>
-                </li>
-              </ul>
-              <li className="view-all">
-                Show All
-                <span>
-                  <img
-                    src={ChevronDownGreyIcon}
-                    alt="chevron-down-grey"
-                    className="chevron-down-logo"
-                  />
-                </span>
-              </li>
-            </Dropdown.Menu>
-          </Dropdown>
+            </Badge>
+          </li>
+          <Menu
+            anchorEl={anchorEl}
+            keepMounted
+            className=" notifications"
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            {/* <List> */}
+            <div className="notification-heading">Notifications</div>
+            <ListItem alignItems="flex-start">
+              <img
+                alt="user-01"
+                className="founder-logo"
+                src={UserImage01Icon}
+              />
+              <ListItemText>
+                <div className="notification-message">
+                  Suzzeth Bungaos tagged you and 18 others in a post
+                </div>
+                <div className="notification-time">Oct 3, 2017 9:00 PM</div>
+              </ListItemText>
+            </ListItem>
+            <Divider component="li" />
+            <ListItem alignItems="flex-start">
+              <img
+                alt="user-02"
+                className="founder-logo"
+                src={UserImage02Icon}
+              />
+              <ListItemText>
+                <div className="notification-message">
+                  Suzzeth Bungaos tagged you and 18 others in a post
+                </div>
+                <div className="notification-time">Oct 3, 2017 9:00 PM</div>
+              </ListItemText>
+            </ListItem>
+            <Divider component="li" />
+            <ListItem alignItems="flex-start">
+              <img
+                alt="user-03"
+                className="founder-logo"
+                src={UserImage03Icon}
+              />
+              <ListItemText>
+                <div className="notification-message">
+                  Suzzeth Bungaos tagged you and 18 others in a post
+                </div>
+                <div className="notification-time">Oct 3, 2017 9:00 PM</div>
+              </ListItemText>
+            </ListItem>
+            <Divider component="li" />
+            <ListItem alignItems="flex-start">
+              <img
+                alt="user-04"
+                className="founder-logo"
+                src={UserImage04Icon}
+              />
+              <ListItemText>
+                <div className="notification-message">
+                  Suzzeth Bungaos tagged you and 18 others in a post
+                </div>
+                <div className="notification-time">Oct 3, 2017 9:00 PM</div>
+              </ListItemText>
+            </ListItem>
+            <Divider component="li" />
 
+            <div className="view-all">
+              Show All
+              <span>
+                <img
+                  src={ChevronDownGreyIcon}
+                  alt="chevron-down-grey"
+                  className="chevron-down-logo"
+                />
+              </span>
+            </div>
+          </Menu>
           <li className="nav-item">
             <img
               src={UserImage05Icon}
@@ -158,39 +178,39 @@ const Header = () => {
                     </div>
                     <div className="col-10">Profile</div>
                   </Link>
-                </div>
-                <div>
-                  <Link className="dropdown-item user-dropdown" to="#">
-                    <div className="col-2">
-                      <img
-                        src={UserProfileSettingIcon}
-                        alt="user-profile-seting"
-                      />
-                    </div>
-                    <div className="col-10">Settings</div>
-                  </Link>
-                </div>
-                <div>
-                  <Link className="dropdown-item user-dropdown" to="#">
-                    <div className="col-2">
-                      <img
-                        src={UserProfilePasswordIcon}
-                        alt="user-profile-password"
-                      />
-                    </div>
-                    <div className="col-10">Change Password</div>
-                  </Link>
-                </div>
-                <div>
-                  <Link className="dropdown-item user-dropdown" to="/">
-                    <div className="col-2">
-                      <img
-                        src={UserProfileLogoutIcon}
-                        alt="user-profile-logout"
-                      />
-                    </div>
-                    <div className="col-10">Logout</div>
-                  </Link>
+                  <div>
+                    <Link className="dropdown-item user-dropdown" to="#">
+                      <div className="col-2">
+                        <img
+                          src={UserProfileSettingIcon}
+                          alt="user-profile-seting"
+                        />
+                      </div>
+                      <div className="col-10">Settings</div>
+                    </Link>
+                  </div>
+                  <div>
+                    <Link className="dropdown-item user-dropdown" to="#">
+                      <div className="col-2">
+                        <img
+                          src={UserProfilePasswordIcon}
+                          alt="user-profile-password"
+                        />
+                      </div>
+                      <div className="col-10">Change Password</div>
+                    </Link>
+                  </div>
+                  <div>
+                    <Link className="dropdown-item user-dropdown" to="/">
+                      <div className="col-2">
+                        <img
+                          src={UserProfileLogoutIcon}
+                          alt="user-profile-logout"
+                        />
+                      </div>
+                      <div className="col-10">Logout</div>
+                    </Link>
+                  </div>
                 </div>
               </Dropdown.Menu>
             </Dropdown>

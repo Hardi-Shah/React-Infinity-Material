@@ -1,14 +1,27 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import {
-  Alert,
-  Button,
-  Form,
-  FormGroup,
-  Pagination,
-  Tab,
+  Grid,
   Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  TableContainer,
+  Button,
+  Switch,
+  FormControlLabel,
+  Checkbox,
+  FormGroup,
+  Radio,
   Tabs,
-} from "react-bootstrap";
+  Tab,
+  Typography,
+  Box,
+  InputLabel,
+  MenuItem,
+} from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
+import { Form, Pagination } from "react-bootstrap";
 import {
   AlertCloseIcon,
   AlertDangerIcon,
@@ -23,12 +36,83 @@ import {
 } from "../../assets/images";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
+import { FormControl } from "@material-ui/core";
+import { Select } from "@material-ui/core";
 
 const InnerPage = () => {
   const [showSuccess, setShowSuccess] = useState(true);
   const [showInfo, setShowInfo] = useState(true);
   const [showWarning, setShowWarning] = useState(true);
   const [showDanger, setShowDanger] = useState(true);
+
+  const [state, setState] = useState({
+    checkedSwitch: true,
+  });
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setState({ ...state, [event.target.name]: event.target.checked });
+  };
+
+  const [checked, setChecked] = useState(true);
+
+  const handleChangeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setChecked(event.target.checked);
+  };
+
+  const [radio, setRadio] = useState("option1");
+
+  const handleChangeRadio = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setRadio((event.target as HTMLInputElement).value);
+  };
+
+  const [value, setValue] = useState(0);
+
+  const handleChangeTab = (event: React.ChangeEvent<{}>, newValue: number) => {
+    setValue(newValue);
+  };
+
+  const [age, setAge] = React.useState('');
+
+  const handleChangeSelect = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setAge(event.target.value as string);
+  };
+
+  interface ITabPanelProps {
+    children?: React.ReactNode;
+    dir?: string;
+    index: any;
+    value: any;
+  }
+  const TabPanel: React.FC<ITabPanelProps> = ({
+    children = "",
+    dir = "",
+    index = "",
+    value = "",
+    ...other
+  }: ITabPanelProps) => {
+    return (
+      <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`scrollable-auto-tabpanel-${index}`}
+        aria-labelledby={`scrollable-auto-tab-${index}`}
+        {...other}
+      >
+        {value === index && (
+          <Box p={3}>
+            <Typography>{children}</Typography>
+          </Box>
+        )}
+      </div>
+    );
+  };
+
+  const a11yProps = (index: any) => {
+    return {
+      id: `scrollable-auto-tab-${index}`,
+      "aria-controls": `scrollable-auto-tabpanel-${index}`,
+    };
+  };
 
   function toggleOverlay() {
     document
@@ -54,213 +138,237 @@ const InnerPage = () => {
                 <div className="table-text">
                   <div className="table-border">Table</div>
                 </div>
-                <div className="table-responsive stats-table">
-                  <Table
-                    className="table table-borderless"
-                    data-pagination="true"
-                    data-page-list="[5, 10, 25, 50, 100, ALL]"
-                    data-page-size="6"
-                  >
-                    <thead>
-                      <tr>
-                        <th scope="col">Type</th>
-                        <th scope="col">Lead Name</th>
-                        <th scope="col">Views</th>
-                        <th scope="col">Favorites</th>
-                        <th scope="col">Last visit</th>
-                        <th scope="col" className="status-head">
-                          Status
-                        </th>
-                        <th scope="col">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td className="buyer">Buyer</td>
-                        <td>Denise Ann</td>
-                        <td className="text-views">153</td>
-                        <td className="text-favorites">0</td>
-                        <td className="text-visit">9:23AM</td>
-                        <td>
-                          <Button
-                            type="button"
-                            variant="outline-success"
-                            className="btn-text"
-                          >
-                            In Progress
-                          </Button>
-                        </td>
-                        <td className="">
-                          <img className="edit-img" src={EditIcon} alt="" />
-                          <img className="edit-img" src={BinIcon} alt="" />
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="buyer">Buyer</td>
-                        <td>Denise Ann</td>
-                        <td className="text-views">153</td>
-                        <td className="text-favorites">0</td>
-                        <td className="text-visit">9:23AM</td>
-                        <td>
-                          <Button
-                            variant="outline-warning"
-                            type="button"
-                            className="btn-pending"
-                          >
-                            Pending
-                          </Button>
-                        </td>
-                        <td>
-                          <img className="edit-img" src={EditIcon} alt="" />
-                          <img className="edit-img" src={BinIcon} alt="" />
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="landlord">Landlord</td>
-                        <td>Denise Ann</td>
-                        <td className="text-views">153</td>
-                        <td className="text-favorites">0</td>
-                        <td className="text-visit">9:23AM</td>
-                        <td>
-                          <Button
-                            variant="outline-danger"
-                            type="button"
-                            className="btn-cancelled"
-                          >
-                            Cancelled
-                          </Button>
-                        </td>
-                        <td>
-                          <img className="edit-img" src={EditIcon} alt="" />
-                          <img className="edit-img" src={BinIcon} alt="" />
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="seller">Seller</td>
-                        <td>Denise Ann</td>
-                        <td className="text-views">153</td>
-                        <td className="text-favorites">0</td>
-                        <td className="text-visit">9:23AM</td>
-                        <td>
-                          <Button
-                            type="button"
-                            variant="outline-success"
-                            className="btn-text"
-                          >
-                            In Progress
-                          </Button>
-                        </td>
-                        <td>
-                          <img className="edit-img" src={EditIcon} alt="" />
-                          <img className="edit-img" src={BinIcon} alt="" />
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="buyer">Buyer</td>
-                        <td>Denise Ann</td>
-                        <td className="text-views">153</td>
-                        <td className="text-favorites">0</td>
-                        <td className="text-visit">9:23AM</td>
-                        <td>
-                          <Button
-                            variant="outline-danger"
-                            type="button"
-                            className="btn-cancelled"
-                          >
-                            Cancelled
-                          </Button>
-                        </td>
-                        <td>
-                          <img className="edit-img" src={EditIcon} alt="" />
-                          <img className="edit-img" src={BinIcon} alt="" />
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="buyer">Buyer</td>
-                        <td>Denise Ann</td>
-                        <td className="text-views">153</td>
-                        <td className="text-favorites">0</td>
-                        <td className="text-visit">9:23AM</td>
-                        <td>
-                          <Button
-                            type="button"
-                            variant="outline-success"
-                            className="btn-text"
-                          >
-                            In Progress
-                          </Button>
-                        </td>
-                        <td>
-                          <img className="edit-img" src={EditIcon} alt="" />
-                          <img className="edit-img" src={BinIcon} alt="" />
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="buyer">Buyer</td>
-                        <td>Denise Ann</td>
-                        <td className="text-views">153</td>
-                        <td className="text-favorites">0</td>
-                        <td className="text-visit">9:23AM</td>
-                        <td>
-                          <Button
-                            type="button"
-                            variant="outline-success"
-                            className="btn-text"
-                          >
-                            In Progress
-                          </Button>
-                        </td>
-                        <td>
-                          <img className="edit-img" src={EditIcon} alt="" />
-                          <img className="edit-img" src={BinIcon} alt="" />
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="buyer">Buyer</td>
-                        <td>Denise Ann</td>
-                        <td className="text-views">153</td>
-                        <td className="text-favorites">0</td>
-                        <td className="text-visit">9:23AM</td>
-                        <td>
-                          <Button
-                            variant="outline-warning"
-                            type="button"
-                            className="btn-pending"
-                          >
-                            Pending
-                          </Button>
-                        </td>
-                        <td>
-                          <img className="edit-img" src={EditIcon} alt="" />
-                          <img className="edit-img" src={BinIcon} alt="" />
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="buyer">Buyer</td>
-                        <td>Denise Ann</td>
-                        <td className="text-views">153</td>
-                        <td className="text-favorites">0</td>
-                        <td className="text-visit">9:23AM</td>
-                        <td>
-                          <Button
-                            type="button"
-                            variant="outline-primary"
-                            className="btn-completed"
-                          >
-                            Completed
-                          </Button>
-                        </td>
-                        <td>
-                          <img className="edit-img" src={EditIcon} alt="" />
-                          <img className="edit-img" src={BinIcon} alt="" />
-                        </td>
-                      </tr>
-                    </tbody>
-                  </Table>
+                <div className="stats-table">
+                  <TableContainer>
+                    <Table
+                      data-pagination="TableRowue"
+                      data-page-list="[5, 10, 25, 50, 100, ALL]"
+                      data-page-size="6"
+                    >
+                      <TableHead>
+                        <TableRow>
+                          <TableCell scope="col">Type</TableCell>
+                          <TableCell scope="col">Lead Name</TableCell>
+                          <TableCell scope="col">Views</TableCell>
+                          <TableCell scope="col">Favorites</TableCell>
+                          <TableCell scope="col">Last visit</TableCell>
+                          <TableCell scope="col" className="status-head">
+                            Status
+                          </TableCell>
+                          <TableCell scope="col">Action</TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        <TableRow>
+                          <TableCell className="buyer">Buyer</TableCell>
+                          <TableCell>Denise Ann</TableCell>
+                          <TableCell className="text-views">153</TableCell>
+                          <TableCell className="text-favorites">0</TableCell>
+                          <TableCell className="text-visit">9:23AM</TableCell>
+                          <TableCell>
+                            <Button
+                              type="button"
+                              variant="outlined"
+                              className="btn-text"
+                            >
+                              In Progress
+                            </Button>
+                          </TableCell>
+                          <TableCell className="">
+                            <img className="edit-img" src={EditIcon} alt="" />
+                            <img className="edit-img" src={BinIcon} alt="" />
+                          </TableCell>
+                        </TableRow>
+                        <TableRow>
+                          <TableCell className="buyer">Buyer</TableCell>
+                          <TableCell>Denise Ann</TableCell>
+                          <TableCell className="text-views">153</TableCell>
+                          <TableCell className="text-favorites">0</TableCell>
+                          <TableCell className="text-visit">9:23AM</TableCell>
+
+                          <TableCell>
+                            <Button
+                              variant="outlined"
+                              type="button"
+                              className="btn-pending"
+                            >
+                              Pending
+                            </Button>
+                          </TableCell>
+                          <TableCell>
+                            <img className="edit-img" src={EditIcon} alt="" />
+                            <img className="edit-img" src={BinIcon} alt="" />
+                          </TableCell>
+                        </TableRow>
+                        <TableRow>
+                          <TableCell className="landlord">Landlord</TableCell>
+                          <TableCell>Denise Ann</TableCell>
+                          <TableCell className="text-views">153</TableCell>
+                          <TableCell className="text-favorites">0</TableCell>
+                          <TableCell className="text-visit">9:23AM</TableCell>
+                          <TableCell>
+                            <Button
+                              variant="outlined"
+                              type="button"
+                              className="btn-cancelled"
+                            >
+                              Cancelled
+                            </Button>
+                          </TableCell>
+                          <TableCell>
+                            <img className="edit-img" src={EditIcon} alt="" />
+                            <img className="edit-img" src={BinIcon} alt="" />
+                          </TableCell>
+                        </TableRow>
+                        <TableRow>
+                          <TableCell className="seller">Seller</TableCell>
+                          <TableCell>Denise Ann</TableCell>
+                          <TableCell className="text-views">153</TableCell>
+                          <TableCell className="text-favorites">0</TableCell>
+                          <TableCell className="text-visit">9:23AM</TableCell>
+                          <TableCell>
+                            <Button
+                              type="button"
+                              variant="outlined"
+                              className="btn-text"
+                            >
+                              In Progress
+                            </Button>
+                          </TableCell>
+                          <TableCell>
+                            <img className="edit-img" src={EditIcon} alt="" />
+                            <img className="edit-img" src={BinIcon} alt="" />
+                          </TableCell>
+                        </TableRow>
+                        <TableRow>
+                          <TableCell className="buyer">Buyer</TableCell>
+                          <TableCell>Denise Ann</TableCell>
+                          <TableCell className="text-views">153</TableCell>
+                          <TableCell className="text-favorites">0</TableCell>
+                          <TableCell className="text-visit">9:23AM</TableCell>
+                          <TableCell>
+                            <Button
+                              variant="outlined"
+                              type="button"
+                              className="btn-cancelled"
+                            >
+                              Cancelled
+                            </Button>
+                          </TableCell>
+                          <TableCell>
+                            <img className="edit-img" src={EditIcon} alt="" />
+                            <img className="edit-img" src={BinIcon} alt="" />
+                          </TableCell>
+                        </TableRow>
+                        <TableRow>
+                          <TableCell className="buyer">Buyer</TableCell>
+                          <TableCell>Denise Ann</TableCell>
+                          <TableCell className="text-views">153</TableCell>
+                          <TableCell className="text-favorites">0</TableCell>
+                          <TableCell className="text-visit">9:23AM</TableCell>
+                          <TableCell>
+                            <Button
+                              type="button"
+                              variant="outlined"
+                              className="btn-text"
+                            >
+                              In Progress
+                            </Button>
+                          </TableCell>
+                          <TableCell>
+                            <img className="edit-img" src={EditIcon} alt="" />
+                            <img className="edit-img" src={BinIcon} alt="" />
+                          </TableCell>
+                        </TableRow>
+                        <TableRow>
+                          <TableCell className="buyer">Buyer</TableCell>
+                          <TableCell>Denise Ann</TableCell>
+                          <TableCell className="text-views">153</TableCell>
+                          <TableCell className="text-favorites">0</TableCell>
+                          <TableCell className="text-visit">9:23AM</TableCell>
+                          <TableCell>
+                            <Button
+                              type="button"
+                              variant="outlined"
+                              className="btn-text"
+                            >
+                              In Progress
+                            </Button>
+                          </TableCell>
+                          <TableCell>
+                            <img className="edit-img" src={EditIcon} alt="" />
+                            <img className="edit-img" src={BinIcon} alt="" />
+                          </TableCell>
+                        </TableRow>
+                        <TableRow>
+                          <TableCell className="buyer">Buyer</TableCell>
+                          <TableCell>Denise Ann</TableCell>
+                          <TableCell className="text-views">153</TableCell>
+                          <TableCell className="text-favorites">0</TableCell>
+                          <TableCell className="text-visit">9:23AM</TableCell>
+                          <TableCell>
+                            <Button
+                              variant="outlined"
+                              type="button"
+                              className="btn-pending"
+                            >
+                              Pending
+                            </Button>
+                          </TableCell>
+                          <TableCell>
+                            <img className="edit-img" src={EditIcon} alt="" />
+                            <img className="edit-img" src={BinIcon} alt="" />
+                          </TableCell>
+                        </TableRow>
+                        <TableRow>
+                          <TableCell className="buyer">Buyer</TableCell>
+                          <TableCell>Denise Ann</TableCell>
+                          <TableCell className="text-views">153</TableCell>
+                          <TableCell className="text-favorites">0</TableCell>
+                          <TableCell className="text-visit">9:23AM</TableCell>
+                          <TableCell>
+                            <Button
+                              type="button"
+                              variant="outlined"
+                              className="btn-completed"
+                            >
+                              Completed
+                            </Button>
+                          </TableCell>
+                          <TableCell>
+                            <img className="edit-img" src={EditIcon} alt="" />
+                            <img className="edit-img" src={BinIcon} alt="" />
+                          </TableCell>
+                        </TableRow>
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
                   <div className="main-pagination">
                     <div className="pagination justify-content-start">
                       <h3 className="show-text">Show</h3>
                       <div className="select-div">
+                        <FormControl
+                          variant="filled"
+                          
+                        >
+                          <InputLabel id="demo-simple-select-filled-label">
+                            Age
+                          </InputLabel>
+                          <Select
+                            labelId="demo-simple-select-filled-label"
+                            id="demo-simple-select-filled"
+                            value={age}
+                            onChange={handleChangeSelect}
+                          >
+                            <MenuItem value="">
+                              <em>None</em>
+                            </MenuItem>
+                            <MenuItem value={10}>Ten</MenuItem>
+                            <MenuItem value={20}>Twenty</MenuItem>
+                            <MenuItem value={30}>Thirty</MenuItem>
+                          </Select>
+                        </FormControl>
+                        
                         <Form.Control
                           as="select"
                           defaultValue={6}
@@ -329,7 +437,7 @@ const InnerPage = () => {
                       <FormGroup>
                         <Form.Label
                           className="one-column-label"
-                          htmlFor="exampleInputDropdown"
+                          htmlFor="exampleInpuTableCellropdown"
                         >
                           Dropdown
                         </Form.Label>
@@ -433,7 +541,7 @@ const InnerPage = () => {
                       <FormGroup>
                         <Form.Label
                           className="one-column-label"
-                          htmlFor="exampleInputDropdown"
+                          htmlFor="exampleInpuTableCellropdown"
                         >
                           Dropdown
                         </Form.Label>
@@ -463,7 +571,7 @@ const InnerPage = () => {
                       <FormGroup>
                         <Form.Label
                           className="one-column-label"
-                          htmlFor="exampleInputDropdown"
+                          htmlFor="exampleInpuTableCellropdown"
                         >
                           Dropdown
                         </Form.Label>
@@ -493,7 +601,7 @@ const InnerPage = () => {
                       <FormGroup>
                         <Form.Label
                           className="one-column-label"
-                          htmlFor="exampleInputDropdown"
+                          htmlFor="exampleInpuTableCellropdown"
                         >
                           Dropdown
                         </Form.Label>
@@ -531,7 +639,7 @@ const InnerPage = () => {
                       <FormGroup>
                         <Form.Label
                           className="one-column-label"
-                          htmlFor="exampleInputDropdown"
+                          htmlFor="exampleInpuTableCellropdown"
                         >
                           Dropdown
                         </Form.Label>
@@ -561,7 +669,7 @@ const InnerPage = () => {
                       <FormGroup>
                         <Form.Label
                           className="one-column-label"
-                          htmlFor="exampleInputDropdown"
+                          htmlFor="exampleInpuTableCellropdown"
                         >
                           Dropdown
                         </Form.Label>
@@ -591,7 +699,7 @@ const InnerPage = () => {
                       <FormGroup>
                         <label
                           className="one-column-label"
-                          htmlFor="exampleInputDropdown"
+                          htmlFor="exampleInpuTableCellropdown"
                         >
                           Dropdown
                         </label>
@@ -621,7 +729,7 @@ const InnerPage = () => {
                       <FormGroup>
                         <Form.Label
                           className="one-column-label"
-                          htmlFor="exampleInputDropdown"
+                          htmlFor="exampleInpuTableCellropdown"
                         >
                           Dropdown
                         </Form.Label>
@@ -677,47 +785,29 @@ const InnerPage = () => {
 
                     <div className="col-md-12">
                       <FormGroup>
-                        <div className="custom-control custom-checkbox checkbox1">
-                          <Form.Check.Input
-                            type="checkbox"
-                            className="custom-control-input"
-                            id="inlineCheckbox1"
-                            value="option1"
+                        <div className="custom-Control custom-checkbox checkbox1">
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                checked={checked}
+                                color="primary"
+                                onChange={handleChangeCheckbox}
+                              />
+                            }
+                            label="Option 1"
                           />
-                          <Form.Check.Label
-                            className="custom-control-label"
-                            htmlFor="inlineCheckbox1"
-                          >
-                            Option 1
-                          </Form.Check.Label>
-                        </div>
-                        <div className="custom-control custom-checkbox checkbox1">
-                          <Form.Check.Input
-                            type="checkbox"
-                            className="custom-control-input"
-                            id="inlineCheckbox2"
-                            value="option2"
+                          <FormControlLabel
+                            control={
+                              <Checkbox defaultChecked color="primary" />
+                            }
+                            label="Option 2"
                           />
-                          <Form.Check.Label
-                            className="custom-control-label"
-                            htmlFor="inlineCheckbox2"
-                          >
-                            Option 2
-                          </Form.Check.Label>
-                        </div>
-                        <div className="custom-control custom-checkbox checkbox1">
-                          <Form.Check.Input
-                            type="checkbox"
-                            className="custom-control-input"
-                            id="inlineCheckbox3"
-                            value="option3"
+                          <FormControlLabel
+                            control={
+                              <Checkbox defaultChecked color="primary" />
+                            }
+                            label="Option 3"
                           />
-                          <Form.Check.Label
-                            className="custom-control-label"
-                            htmlFor="inlineCheckbox3"
-                          >
-                            Option 3
-                          </Form.Check.Label>
                         </div>
                       </FormGroup>
                     </div>
@@ -735,50 +825,43 @@ const InnerPage = () => {
 
                     <div className="col-md-12">
                       <FormGroup>
-                        <div className="custom-control custom-radio checkbox1">
-                          <Form.Check.Input
-                            type="radio"
-                            className="custom-control-input"
-                            name="InputRadio"
-                            id="InputRadio1"
+                        <div className="custom-Control custom-radio checkbox1">
+                          <FormControlLabel
                             value="option1"
+                            control={
+                              <Radio
+                                onChange={handleChangeRadio}
+                                color="primary"
+                                name="option"
+                                checked={radio === "option1"}
+                              />
+                            }
+                            label="Option 1"
                           />
-                          <Form.Check.Label
-                            className="custom-control-label"
-                            htmlFor="InputRadio1"
-                          >
-                            Option 1
-                          </Form.Check.Label>
-                        </div>
-                        <div className="custom-control custom-radio checkbox1">
-                          <Form.Check.Input
-                            type="radio"
-                            className="custom-control-input"
-                            name="InputRadio"
-                            id="InputRadio2"
+                          <FormControlLabel
                             value="option2"
+                            control={
+                              <Radio
+                                onChange={handleChangeRadio}
+                                color="primary"
+                                checked={radio === "option2"}
+                                name="option"
+                              />
+                            }
+                            label="Option 2"
                           />
-                          <Form.Check.Label
-                            className="custom-control-label"
-                            htmlFor="InputRadio2"
-                          >
-                            Option 2
-                          </Form.Check.Label>
-                        </div>
-                        <div className="custom-control custom-radio checkbox1">
-                          <Form.Check.Input
-                            type="radio"
-                            className="custom-control-input"
-                            name="InputRadio"
-                            id="InputRadio3"
+                          <FormControlLabel
                             value="option3"
+                            control={
+                              <Radio
+                                onChange={handleChangeRadio}
+                                checked={radio === "option3"}
+                                color="primary"
+                                name="option"
+                              />
+                            }
+                            label="Option 3"
                           />
-                          <Form.Check.Label
-                            className="custom-control-label"
-                            htmlFor="InputRadio3"
-                          >
-                            Option 3
-                          </Form.Check.Label>
                         </div>
                       </FormGroup>
                     </div>
@@ -787,22 +870,30 @@ const InnerPage = () => {
                       <div className="button-element">
                         <Button
                           type="button"
-                          variant="primary"
+                          variant="contained"
+                          color="primary"
                           className="primary-btn"
                         >
                           Primary
                         </Button>
                         <Button
                           type="button"
-                          variant="secondary"
+                          variant="contained"
+                          color="secondary"
                           className="secondary-btn"
                         >
                           Secondary
                         </Button>
-                        <Form.Check
-                          type="switch"
-                          id="custom-switch"
-                          className="custom-switch"
+                        <FormControlLabel
+                          control={
+                            <Switch
+                              checked={state.checkedSwitch}
+                              onChange={handleChange}
+                              name="checkedSwitch"
+                              color="primary"
+                            />
+                          }
+                          label="ON/OFF"
                         />
                       </div>
                     </div>
@@ -812,7 +903,7 @@ const InnerPage = () => {
                         {!showSuccess && (
                           <div>
                             <Button
-                              variant="success"
+                              variant="contained"
                               className="mb-2 btn-success"
                               onClick={() => setShowSuccess(true)}
                             >
@@ -821,9 +912,7 @@ const InnerPage = () => {
                           </div>
                         )}
                         {showSuccess && (
-                          <Alert
-                            className=" alert-success"
-                          >
+                          <Alert icon={false} className="alert-success">
                             <img
                               className="alert-icon"
                               src={AlertSuccessIcon}
@@ -844,7 +933,7 @@ const InnerPage = () => {
                         {!showInfo && (
                           <div>
                             <Button
-                              variant="info"
+                              variant="contained"
                               className="btn-info mb-2"
                               onClick={() => setShowInfo(true)}
                             >
@@ -853,7 +942,7 @@ const InnerPage = () => {
                           </div>
                         )}
                         {showInfo && (
-                          <Alert className="alert alert-info">
+                          <Alert icon={false} className="alert alert-info">
                             <img
                               className="alert-icon"
                               src={AlertInfoIcon}
@@ -874,7 +963,7 @@ const InnerPage = () => {
                         {!showWarning && (
                           <div>
                             <Button
-                              variant="warning"
+                              variant="contained"
                               className=" btn-warning mb-2"
                               onClick={() => setShowWarning(true)}
                             >
@@ -883,7 +972,7 @@ const InnerPage = () => {
                           </div>
                         )}
                         {showWarning && (
-                          <Alert className="alert alert-warning">
+                          <Alert icon={false} className="alert alert-warning">
                             <img
                               className="alert-icon"
                               src={AlertWarnIcon}
@@ -904,7 +993,7 @@ const InnerPage = () => {
                         {!showDanger && (
                           <div>
                             <Button
-                              variant="danger"
+                              variant="contained"
                               className="btn-danger mb-2"
                               onClick={() => setShowDanger(true)}
                             >
@@ -913,7 +1002,11 @@ const InnerPage = () => {
                           </div>
                         )}
                         {showDanger && (
-                          <Alert className="alert alert-danger" role="alert">
+                          <Alert
+                            icon={false}
+                            className="alert alert-danger"
+                            role="alert"
+                          >
                             <img
                               className="alert-icon"
                               src={AlertDangerIcon}
@@ -941,130 +1034,34 @@ const InnerPage = () => {
                   </div>
                   <div className="col-md-12">
                     <Tabs
-                      defaultActiveKey="maintenance1"
-                      id="uncontrolled-tab-example"
+                      value={value}
+                      onChange={handleChangeTab}
+                      indicatorColor="primary"
+                      textColor="primary"
+                      variant="scrollable"
+                      scrollButtons="auto"
+                      aria-label="scrollable auto tabs example"
                     >
-                      <Tab eventKey="maintenance1" title="Maintenance1">
-                        <p className="nav-paragraph">
-                          Lorem Ipsum is simply dummy text of the printing and
-                          typesetting industry. Lorem Ipsum has been the
-                          industry's standard dummy text ever since the 1500s,
-                          when an unknown printer took a galley of type and
-                          scrambled it to make a type specimen book. It has
-                          survived not only five centuries, but also the leap
-                          into electronic typesetting, remaining essentially
-                          unchanged.It was popularised in the 1960s with the
-                          release of Letraset sheets containing Lorem Ipsum
-                          passages, and more recently with desktop publishing
-                          software like Aldus PageMaker including versions of
-                          Lorem Ipsum.
-                        </p>
-                        <p className="nav-paragraph">
-                          Lorem Ipsum is simply dummy text of the printing and
-                          typesetting industry. Lorem Ipsum has been the
-                          industry's standard dummy text ever since the 1500s,
-                          when an unknown printer took a galley of type and
-                          scrambled it to make a type specimen book. It has
-                          survived not only five centuries, but also the leap
-                          into electronic typesetting, remaining essentially
-                          unchanged.It was popularised in the 1960s with the
-                          release of Letraset sheets containing Lorem Ipsum
-                          passages, and more recently with desktop publishing
-                          software like Aldus PageMaker including versions of
-                          Lorem Ipsum.
-                        </p>
-                      </Tab>
-                      <Tab eventKey="maintenance2" title="Maintenance2">
-                        <p className="nav-paragraph">
-                          Lorem Ipsum is simply dummy text of the printing and
-                          typesetting industry. Lorem Ipsum has been the
-                          industry's standard dummy text ever since the 1500s,
-                          when an unknown printer took a galley of type and
-                          scrambled it to make a type specimen book. It has
-                          survived not only five centuries, but also the leap
-                          into electronic typesetting, remaining essentially
-                          unchanged.It was popularised in the 1960s with the
-                          release of Letraset sheets containing Lorem Ipsum
-                          passages, and more recently with desktop publishing
-                          software like Aldus PageMaker including versions of
-                          Lorem Ipsum.
-                        </p>
-                        <p className="nav-paragraph">
-                          Lorem Ipsum is simply dummy text of the printing and
-                          typesetting industry. Lorem Ipsum has been the
-                          industry's standard dummy text ever since the 1500s,
-                          when an unknown printer took a galley of type and
-                          scrambled it to make a type specimen book. It has
-                          survived not only five centuries, but also the leap
-                          into electronic typesetting, remaining essentially
-                          unchanged.It was popularised in the 1960s with the
-                          release of Letraset sheets containing Lorem Ipsum
-                          passages, and more recently with desktop publishing
-                          software like Aldus PageMaker including versions of
-                          Lorem Ipsum.
-                        </p>
-                      </Tab>
-                      <Tab eventKey="maintenance3" title="Maintenance3">
-                        <p className="nav-paragraph">
-                          Lorem Ipsum is simply dummy text of the printing and
-                          typesetting industry. Lorem Ipsum has been the
-                          industry's standard dummy text ever since the 1500s,
-                          when an unknown printer took a galley of type and
-                          scrambled it to make a type specimen book. It has
-                          survived not only five centuries, but also the leap
-                          into electronic typesetting, remaining essentially
-                          unchanged.It was popularised in the 1960s with the
-                          release of Letraset sheets containing Lorem Ipsum
-                          passages, and more recently with desktop publishing
-                          software like Aldus PageMaker including versions of
-                          Lorem Ipsum.
-                        </p>
-                        <p className="nav-paragraph">
-                          Lorem Ipsum is simply dummy text of the printing and
-                          typesetting industry. Lorem Ipsum has been the
-                          industry's standard dummy text ever since the 1500s,
-                          when an unknown printer took a galley of type and
-                          scrambled it to make a type specimen book. It has
-                          survived not only five centuries, but also the leap
-                          into electronic typesetting, remaining essentially
-                          unchanged.It was popularised in the 1960s with the
-                          release of Letraset sheets containing Lorem Ipsum
-                          passages, and more recently with desktop publishing
-                          software like Aldus PageMaker including versions of
-                          Lorem Ipsum.
-                        </p>
-                      </Tab>
-                      <Tab eventKey="maintenance4" title="Maintenance4">
-                        <p className="nav-paragraph">
-                          Lorem Ipsum is simply dummy text of the printing and
-                          typesetting industry. Lorem Ipsum has been the
-                          industry's standard dummy text ever since the 1500s,
-                          when an unknown printer took a galley of type and
-                          scrambled it to make a type specimen book. It has
-                          survived not only five centuries, but also the leap
-                          into electronic typesetting, remaining essentially
-                          unchanged.It was popularised in the 1960s with the
-                          release of Letraset sheets containing Lorem Ipsum
-                          passages, and more recently with desktop publishing
-                          software like Aldus PageMaker including versions of
-                          Lorem Ipsum.
-                        </p>
-                        <p className="nav-paragraph">
-                          Lorem Ipsum is simply dummy text of the printing and
-                          typesetting industry. Lorem Ipsum has been the
-                          industry's standard dummy text ever since the 1500s,
-                          when an unknown printer took a galley of type and
-                          scrambled it to make a type specimen book. It has
-                          survived not only five centuries, but also the leap
-                          into electronic typesetting, remaining essentially
-                          unchanged.It was popularised in the 1960s with the
-                          release of Letraset sheets containing Lorem Ipsum
-                          passages, and more recently with desktop publishing
-                          software like Aldus PageMaker including versions of
-                          Lorem Ipsum.
-                        </p>
-                      </Tab>
+                      <Tab label="Today's Orders" {...a11yProps(0)} />
+                      <Tab label="Scheduled" {...a11yProps(1)} />
+                      <Tab label="Completed" {...a11yProps(2)} />
+                      <Tab label="Cancelled" {...a11yProps(3)} />
                     </Tabs>
+                    <TabPanel value={value} index={0}>
+                      Tab One
+                    </TabPanel>
+                    <TabPanel value={value} index={1}>
+                      Tab Two
+                    </TabPanel>
+                    <TabPanel value={value} index={2}>
+                      Tab Three
+                    </TabPanel>
+                    <TabPanel value={value} index={3}>
+                      Tab Four
+                    </TabPanel>
+                    <TabPanel value={value} index={4}>
+                      Tab Five
+                    </TabPanel>
                   </div>
                 </div>
               </div>

@@ -1,4 +1,12 @@
-import { Table } from "react-bootstrap";
+import {
+  Grid,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  TableContainer,
+} from "@material-ui/core";
 import {
   AnalysisSmallGraphIcon,
   AnalyticsGraphIcon,
@@ -26,172 +34,217 @@ const Dashboard = () => {
       <Sidebar />
       <div id="main">
         <div className="dashboard-content">
-          <div className="row admin-content">
-            <div className="col-md-6 col-sm-6">
+          <Grid container className="admin-content">
+            <Grid item xs={12} sm={6} md={6} className="col-md-6 col-sm-6">
               <div className="card">
                 <div className="card-body">
-                  <div className="row admin-div content-box">
-                    <div className="col-10">
+                  <Grid container className="admin-div content-box">
+                    <Grid item className="col-10">
                       <div className="welcome-admin">Welcome to Admin</div>
                       <div className="number-views">Number of Views</div>
-                    </div>
-                    <div className="col-2 view-count">102</div>
-                  </div>
+                    </Grid>
+                    <Grid item className="col-2 view-count">
+                      102
+                    </Grid>
+                  </Grid>
                 </div>
               </div>
-            </div>
+            </Grid>
 
-            <div className="col-md-6 col-sm-6">
+            <Grid item xs={12} sm={6} md={6} className="col-md-6 col-sm-6">
               <div className="card">
                 <div className="card-body">
-                  <div className="row admin-div content-box">
-                    <div className="col-10">
+                  <Grid container className="admin-div content-box">
+                    <Grid item className="col-10">
                       <div className="welcome-admin">Active</div>
                       <div className="number-views">Number of Contacts</div>
-                    </div>
-                    <div className="col-2 view-count">325</div>
-                  </div>
+                    </Grid>
+                    <Grid item className="col-2 view-count">
+                      325
+                    </Grid>
+                  </Grid>
                 </div>
               </div>
-            </div>
+            </Grid>
 
-            <div className="col-lg-6 col-md-6 col-sm-6 col-xl-3">
+            <Grid
+              item
+              xs={12}
+              lg={6}
+              sm={6}
+              md={6}
+              xl={3}
+              className="col-lg-6 col-md-6 col-sm-6 col-xl-3 "
+            >
               <div className="card">
                 <div className="card-body">
                   <div className="content-box">
-                    <div className="row">
-                      <div className="col-8">
+                    <Grid container>
+                      <Grid item className="col-8">
                         <div className="stats-number total-leads-color">
                           66,615k
                         </div>
                         <div className="stats-name">Total Leads</div>
-                      </div>
-                      <div className="col-4 stats-icon">
+                      </Grid>
+                      <Grid item className="col-4 stats-icon">
                         <img
                           src={TotalLeadsIcon}
                           alt="total-leads"
                           className="stats-img"
                         />
-                      </div>
-                    </div>
-                    <div className="row total-leads-percent">
-                      <div className="col-8 percent-change">% change</div>
-                      <div className="col-4 percent-change-graph">
+                      </Grid>
+                    </Grid>
+                    {/* <div className="row total-leads-percent"> */}
+                    <Grid container className="total-leads-percent">
+                      <Grid item className="col-8 percent-change">
+                        % change
+                      </Grid>
+                      <Grid item className="col-4 percent-change-graph">
                         <img
                           src={AnalysisSmallGraphIcon}
                           alt="analysis-small-graph"
                           className="analysis-small-graph"
                         />
-                      </div>
-                    </div>
+                      </Grid>
+                    </Grid>
                   </div>
                 </div>
               </div>
-            </div>
+            </Grid>
 
-            <div className="col-lg-6 col-md-6 col-sm-6 col-xl-3">
+            <Grid
+              item
+              xs={12}
+              lg={6}
+              sm={6}
+              md={6}
+              xl={3}
+              className="col-lg-6 col-md-6 col-sm-6 col-xl-3"
+            >
               <div className="card">
                 <div className="card-body">
                   <div className="content-box">
-                    <div className="row">
-                      <div className="col-8">
+                    <Grid container>
+                      <Grid item className="col-8">
                         <div className="stats-number total-pending-color">
                           66,615k
                         </div>
                         <div className="stats-name">Total Pending</div>
-                      </div>
-                      <div className="col-4 stats-icon">
+                      </Grid>
+                      <Grid item className="col-4 stats-icon">
                         <img
                           src={TotalPendingIcon}
                           alt="total-pending"
                           className="stats-img"
                         />
-                      </div>
-                    </div>
-                    <div className="row total-pending-percent">
-                      <div className="col-8 percent-change">% change</div>
-                      <div className="col-4 percent-change-graph">
+                      </Grid>
+                    </Grid>
+                    <Grid container className="total-pending-percent">
+                      <Grid item className="col-8 percent-change">
+                        % change
+                      </Grid>
+                      <Grid item className="col-4 percent-change-graph">
                         <img
                           src={AnalysisSmallGraphIcon}
                           alt="analysis-small-graph"
                           className="analysis-small-graph"
                         />
-                      </div>
-                    </div>
+                      </Grid>
+                    </Grid>
                   </div>
                 </div>
               </div>
-            </div>
+            </Grid>
 
-            <div className="col-lg-6 col-md-6 col-sm-6 col-xl-3">
+            <Grid
+              item
+              lg={6}
+              xs={12}
+              sm={6}
+              md={6}
+              xl={3}
+              className="col-lg-6 col-md-6 col-sm-6 col-xl-3"
+            >
               <div className="card">
                 <div className="card-body">
                   <div className="content-box">
-                    <div className="row">
-                      <div className="col-8">
+                    <Grid container>
+                      <Grid item className="col-8">
                         <div className="stats-number total-closed-color">
                           66,615k
                         </div>
                         <div className="stats-name">Total Closed</div>
-                      </div>
-                      <div className="col-4 stats-icon">
+                      </Grid>
+                      <Grid item className="col-4 stats-icon">
                         <img
                           src={TotalClosedIcon}
                           alt="total-closed"
                           className="stats-img"
                         />
-                      </div>
-                    </div>
-                    <div className="row total-closed-percent">
-                      <div className="col-8 percent-change">% change</div>
-                      <div className="col-4 percent-change-graph">
+                      </Grid>
+                    </Grid>
+                    <Grid container className=" total-closed-percent">
+                      <Grid item className="col-8 percent-change">
+                        % change
+                      </Grid>
+                      <Grid item className="col-4 percent-change-graph">
                         <img
                           src={AnalysisSmallGraphIcon}
                           alt="analysis-small-graph"
                           className="analysis-small-graph"
                         />
-                      </div>
-                    </div>
+                      </Grid>
+                    </Grid>
                   </div>
                 </div>
               </div>
-            </div>
+            </Grid>
 
-            <div className="col-lg-6 col-md-6 col-sm-6 col-xl-3">
+            <Grid
+              item
+              lg={6}
+              xs={12}
+              sm={6}
+              md={6}
+              xl={3}
+              className="col-lg-6 col-md-6 col-sm-6 col-xl-3"
+            >
               <div className="card">
                 <div className="card-body">
                   <div className="content-box">
-                    <div className="row">
-                      <div className="col-8">
+                    <Grid container>
+                      <Grid item className="col-8">
                         <div className="stats-number total-leads-report-color">
                           66,615k
                         </div>
                         <div className="stats-name">Total Leads</div>
-                      </div>
-                      <div className="col-4 stats-icon">
+                      </Grid>
+                      <Grid item className="col-4 stats-icon">
                         <img
                           src={TotalLeadsReportIcon}
                           alt="total-leads-report"
                           className="stats-img"
                         />
-                      </div>
-                    </div>
-                    <div className="row total-leads-report-percent">
-                      <div className="col-8 percent-change">% change</div>
-                      <div className="col-4 percent-change-graph">
+                      </Grid>
+                    </Grid>
+                    <Grid container className=" total-leads-report-percent">
+                      <Grid item className="col-8 percent-change">
+                        % change
+                      </Grid>
+                      <Grid className="col-4 percent-change-graph">
                         <img
                           src={AnalysisSmallGraphIcon}
                           alt="analysis-small-graph"
                           className="analysis-small-graph"
                         />
-                      </div>
-                    </div>
+                      </Grid>
+                    </Grid>
                   </div>
                 </div>
               </div>
-            </div>
+            </Grid>
 
-            <div className="col-md-6 col-sm-12">
+            <Grid item xs={12} sm={12} md={6} className="col-md-6 col-sm-12 ">
               <div className="card analytic-card">
                 <div className="card-body">
                   <div className="analytics-div content-box">
@@ -208,85 +261,118 @@ const Dashboard = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </Grid>
 
-            <div className="col-md-6 col-sm-12">
+            <Grid item xs={12} sm={12} md={6} className="col-md-6 col-sm-12 ">
               <div className="card analytic-card">
                 <div className="card-body">
                   <div className="table-div content-box">
                     <div className="table-text">
                       <div className="table-border">Table</div>
                     </div>
-                    <div className="table-responsive stats-table">
-                      <Table className="table table-borderless">
-                        <thead>
-                          <tr>
-                            <th scope="col">Type</th>
-                            <th scope="col">Lead Name</th>
-                            <th scope="col">Views</th>
-                            <th scope="col">Favorites</th>
-                            <th scope="col">Last visit</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td className="buyer">Buyer</td>
-                            <td>Denise Ann</td>
-                            <td className="text-views">153</td>
-                            <td className="text-favorites">0</td>
-                            <td className="text-visit">9:23AM</td>
-                          </tr>
-                          <tr>
-                            <td className="buyer">Buyer</td>
-                            <td>Denise Ann</td>
-                            <td className="text-views">153</td>
-                            <td className="text-favorites">0</td>
-                            <td className="text-visit">9:23AM</td>
-                          </tr>
-                          <tr>
-                            <td className="landlord">Landlord</td>
-                            <td>Denise Ann</td>
-                            <td className="text-views">153</td>
-                            <td className="text-favorites">0</td>
-                            <td className="text-visit">9:23AM</td>
-                          </tr>
-                          <tr>
-                            <td className="seller">Seller</td>
-                            <td>Denise Ann</td>
-                            <td className="text-views">153</td>
-                            <td className="text-favorites">0</td>
-                            <td className="text-visit">9:23AM</td>
-                          </tr>
-                          <tr>
-                            <td className="buyer">Buyer</td>
-                            <td>Denise Ann</td>
-                            <td className="text-views">153</td>
-                            <td className="text-favorites">0</td>
-                            <td className="text-visit">9:23AM</td>
-                          </tr>
-                          <tr>
-                            <td className="buyer">Buyer</td>
-                            <td>Denise Ann</td>
-                            <td className="text-views">153</td>
-                            <td className="text-favorites">0</td>
-                            <td className="text-visit">9:23AM</td>
-                          </tr>
-                          <tr>
-                            <td className="buyer">Buyer</td>
-                            <td>Denise Ann</td>
-                            <td className="text-views">153</td>
-                            <td className="text-favorites">0</td>
-                            <td className="text-visit">9:23AM</td>
-                          </tr>
-                        </tbody>
-                      </Table>
+                    <div className="stats-table">
+                      <TableContainer>
+                        <Table>
+                          <TableHead>
+                            <TableRow>
+                              <TableCell scope="col">Type</TableCell>
+                              <TableCell scope="col">Lead Name</TableCell>
+                              <TableCell scope="col">Views</TableCell>
+                              <TableCell scope="col">Favorites</TableCell>
+                              <TableCell scope="col">Last visit</TableCell>
+                            </TableRow>
+                          </TableHead>
+
+                          <TableBody>
+                            <TableRow>
+                              <TableCell className="buyer">Buyer</TableCell>
+                              <TableCell>Denise Ann</TableCell>
+                              <TableCell className="text-views">153</TableCell>
+                              <TableCell className="text-favorites">
+                                0
+                              </TableCell>
+                              <TableCell className="text-visit">
+                                9:23AM
+                              </TableCell>
+                            </TableRow>
+                            <TableRow>
+                              <TableCell className="buyer">Buyer</TableCell>
+                              <TableCell>Denise Ann</TableCell>
+                              <TableCell className="text-views">153</TableCell>
+                              <TableCell className="text-favorites">
+                                0
+                              </TableCell>
+                              <TableCell className="text-visit">
+                                9:23AM
+                              </TableCell>
+                            </TableRow>
+                            <TableRow>
+                              <TableCell className="landlord">
+                                Landlord
+                              </TableCell>
+                              <TableCell>Denise Ann</TableCell>
+                              <TableCell className="text-views">153</TableCell>
+                              <TableCell className="text-favorites">
+                                0
+                              </TableCell>
+                              <TableCell className="text-visit">
+                                9:23AM
+                              </TableCell>
+                            </TableRow>
+                            <TableRow>
+                              <TableCell className="seller">Seller</TableCell>
+                              <TableCell>Denise Ann</TableCell>
+                              <TableCell className="text-views">153</TableCell>
+                              <TableCell className="text-favorites">
+                                0
+                              </TableCell>
+                              <TableCell className="text-visit">
+                                9:23AM
+                              </TableCell>
+                            </TableRow>
+                            <TableRow>
+                              <TableCell className="buyer">Buyer</TableCell>
+                              <TableCell>Denise Ann</TableCell>
+                              <TableCell className="text-views">153</TableCell>
+                              <TableCell className="text-favorites">
+                                0
+                              </TableCell>
+                              <TableCell className="text-visit">
+                                9:23AM
+                              </TableCell>
+                            </TableRow>
+                            <TableRow>
+                              <TableCell className="buyer">Buyer</TableCell>
+                              <TableCell>Denise Ann</TableCell>
+                              <TableCell className="text-views">153</TableCell>
+                              <TableCell className="text-favorites">
+                                0
+                              </TableCell>
+                              <TableCell className="text-visit">
+                                9:23AM
+                              </TableCell>
+                            </TableRow>
+                            <TableRow>
+                              <TableCell className="buyer">Buyer</TableCell>
+                              <TableCell>Denise Ann</TableCell>
+                              <TableCell className="text-views">153</TableCell>
+                              <TableCell className="text-favorites">
+                                0
+                              </TableCell>
+                              <TableCell className="text-visit">
+                                9:23AM
+                              </TableCell>
+                            </TableRow>
+                          </TableBody>
+                        </Table>
+                      </TableContainer>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </Grid>
             <Footer />
-          </div>
+          </Grid>
         </div>
       </div>
     </div>

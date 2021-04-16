@@ -8,11 +8,11 @@ const Login = () => {
     <div className="wrapper">
       <main className="main-content">
         <Grid container>
-          <Grid item xs={12} sm={6} className="login-left">
+          <Grid item xs={12} sm={12} md={6} className="login-left">
             <img src={Logo} alt="Infinity" className="img-responsive logo" />
           </Grid>
 
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={12} md={6}>
             <div className="login-right">
               <div className="login-content">
                 <h3 className="login-text">Login</h3>
@@ -39,6 +39,7 @@ const Login = () => {
                         variant="contained"
                         color="primary"
                         className="btn-login"
+                        disableRipple={true}
                       >
                         Login
                       </Button>{" "}
