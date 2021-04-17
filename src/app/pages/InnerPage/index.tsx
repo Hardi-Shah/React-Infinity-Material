@@ -8,20 +8,17 @@ import {
   TableRow,
   TableContainer,
   Button,
-  Switch,
   FormControlLabel,
   Checkbox,
   FormGroup,
   Radio,
-  Tabs,
-  Tab,
-  Typography,
-  Box,
-  InputLabel,
   MenuItem,
+  FormLabel,
+  TextField,
+  TextareaAutosize,
 } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
-import { Form, Pagination } from "react-bootstrap";
+import Pagination from "@material-ui/lab/Pagination";
 import {
   AlertCloseIcon,
   AlertDangerIcon,
@@ -29,8 +26,6 @@ import {
   AlertSuccessIcon,
   AlertWarnIcon,
   BinIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
   EditIcon,
   UploadIconWhite,
 } from "../../assets/images";
@@ -38,20 +33,15 @@ import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 import { FormControl } from "@material-ui/core";
 import { Select } from "@material-ui/core";
+import DefaultSwitch from "../../components/Switch";
+import DefaultTabs from "../../components/Tabs";
+import DefaultSelect from "../../components/Select";
 
 const InnerPage = () => {
   const [showSuccess, setShowSuccess] = useState(true);
   const [showInfo, setShowInfo] = useState(true);
   const [showWarning, setShowWarning] = useState(true);
   const [showDanger, setShowDanger] = useState(true);
-
-  const [state, setState] = useState({
-    checkedSwitch: true,
-  });
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
 
   const [checked, setChecked] = useState(true);
 
@@ -65,53 +55,10 @@ const InnerPage = () => {
     setRadio((event.target as HTMLInputElement).value);
   };
 
-  const [value, setValue] = useState(0);
-
-  const handleChangeTab = (event: React.ChangeEvent<{}>, newValue: number) => {
-    setValue(newValue);
-  };
-
-  const [age, setAge] = React.useState('');
+  const [select, setSelect] = useState("");
 
   const handleChangeSelect = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setAge(event.target.value as string);
-  };
-
-  interface ITabPanelProps {
-    children?: React.ReactNode;
-    dir?: string;
-    index: any;
-    value: any;
-  }
-  const TabPanel: React.FC<ITabPanelProps> = ({
-    children = "",
-    dir = "",
-    index = "",
-    value = "",
-    ...other
-  }: ITabPanelProps) => {
-    return (
-      <div
-        role="tabpanel"
-        hidden={value !== index}
-        id={`scrollable-auto-tabpanel-${index}`}
-        aria-labelledby={`scrollable-auto-tab-${index}`}
-        {...other}
-      >
-        {value === index && (
-          <Box p={3}>
-            <Typography>{children}</Typography>
-          </Box>
-        )}
-      </div>
-    );
-  };
-
-  const a11yProps = (index: any) => {
-    return {
-      id: `scrollable-auto-tab-${index}`,
-      "aria-controls": `scrollable-auto-tabpanel-${index}`,
-    };
+    setSelect(event.target.value as string);
   };
 
   function toggleOverlay() {
@@ -128,23 +75,22 @@ const InnerPage = () => {
       <Sidebar />
       <div id="main">
         <div className="dashboard-content">
-          <div className="row">
-            <div className="col-md-12">
+          <Grid container>
+            {/* <div className="row"> */}
+            {/* <div className="col-md-12"> */}
+            <Grid item md={12} className="col-md-12">
               <h3 className="innerpage-text">innerpage</h3>
-            </div>
+              {/* </div> */}
+            </Grid>
 
-            <div className="col-md-12">
+            <Grid item md={12} className="col-md-12">
               <div className="innerpage-table-div content-box">
                 <div className="table-text">
                   <div className="table-border">Table</div>
                 </div>
                 <div className="stats-table">
                   <TableContainer>
-                    <Table
-                      data-pagination="TableRowue"
-                      data-page-list="[5, 10, 25, 50, 100, ALL]"
-                      data-page-size="6"
-                    >
+                    <Table>
                       <TableHead>
                         <TableRow>
                           <TableCell scope="col">Type</TableCell>
@@ -165,14 +111,8 @@ const InnerPage = () => {
                           <TableCell className="text-views">153</TableCell>
                           <TableCell className="text-favorites">0</TableCell>
                           <TableCell className="text-visit">9:23AM</TableCell>
-                          <TableCell>
-                            <Button
-                              type="button"
-                              variant="outlined"
-                              className="btn-text"
-                            >
-                              In Progress
-                            </Button>
+                          <TableCell className="btn-text">
+                            In progress
                           </TableCell>
                           <TableCell className="">
                             <img className="edit-img" src={EditIcon} alt="" />
@@ -186,15 +126,7 @@ const InnerPage = () => {
                           <TableCell className="text-favorites">0</TableCell>
                           <TableCell className="text-visit">9:23AM</TableCell>
 
-                          <TableCell>
-                            <Button
-                              variant="outlined"
-                              type="button"
-                              className="btn-pending"
-                            >
-                              Pending
-                            </Button>
-                          </TableCell>
+                          <TableCell className="btn-pending">Pending</TableCell>
                           <TableCell>
                             <img className="edit-img" src={EditIcon} alt="" />
                             <img className="edit-img" src={BinIcon} alt="" />
@@ -206,14 +138,8 @@ const InnerPage = () => {
                           <TableCell className="text-views">153</TableCell>
                           <TableCell className="text-favorites">0</TableCell>
                           <TableCell className="text-visit">9:23AM</TableCell>
-                          <TableCell>
-                            <Button
-                              variant="outlined"
-                              type="button"
-                              className="btn-cancelled"
-                            >
-                              Cancelled
-                            </Button>
+                          <TableCell className="btn-cancelled">
+                            Cancelled
                           </TableCell>
                           <TableCell>
                             <img className="edit-img" src={EditIcon} alt="" />
@@ -226,14 +152,8 @@ const InnerPage = () => {
                           <TableCell className="text-views">153</TableCell>
                           <TableCell className="text-favorites">0</TableCell>
                           <TableCell className="text-visit">9:23AM</TableCell>
-                          <TableCell>
-                            <Button
-                              type="button"
-                              variant="outlined"
-                              className="btn-text"
-                            >
-                              In Progress
-                            </Button>
+                          <TableCell className="btn-text">
+                            In Progress
                           </TableCell>
                           <TableCell>
                             <img className="edit-img" src={EditIcon} alt="" />
@@ -246,14 +166,8 @@ const InnerPage = () => {
                           <TableCell className="text-views">153</TableCell>
                           <TableCell className="text-favorites">0</TableCell>
                           <TableCell className="text-visit">9:23AM</TableCell>
-                          <TableCell>
-                            <Button
-                              variant="outlined"
-                              type="button"
-                              className="btn-cancelled"
-                            >
-                              Cancelled
-                            </Button>
+                          <TableCell className="btn-cancelled">
+                            Cancelled
                           </TableCell>
                           <TableCell>
                             <img className="edit-img" src={EditIcon} alt="" />
@@ -266,14 +180,8 @@ const InnerPage = () => {
                           <TableCell className="text-views">153</TableCell>
                           <TableCell className="text-favorites">0</TableCell>
                           <TableCell className="text-visit">9:23AM</TableCell>
-                          <TableCell>
-                            <Button
-                              type="button"
-                              variant="outlined"
-                              className="btn-text"
-                            >
-                              In Progress
-                            </Button>
+                          <TableCell className="btn-text">
+                            In Progress
                           </TableCell>
                           <TableCell>
                             <img className="edit-img" src={EditIcon} alt="" />
@@ -286,14 +194,8 @@ const InnerPage = () => {
                           <TableCell className="text-views">153</TableCell>
                           <TableCell className="text-favorites">0</TableCell>
                           <TableCell className="text-visit">9:23AM</TableCell>
-                          <TableCell>
-                            <Button
-                              type="button"
-                              variant="outlined"
-                              className="btn-text"
-                            >
-                              In Progress
-                            </Button>
+                          <TableCell className="btn-text">
+                            In Progress
                           </TableCell>
                           <TableCell>
                             <img className="edit-img" src={EditIcon} alt="" />
@@ -306,15 +208,7 @@ const InnerPage = () => {
                           <TableCell className="text-views">153</TableCell>
                           <TableCell className="text-favorites">0</TableCell>
                           <TableCell className="text-visit">9:23AM</TableCell>
-                          <TableCell>
-                            <Button
-                              variant="outlined"
-                              type="button"
-                              className="btn-pending"
-                            >
-                              Pending
-                            </Button>
-                          </TableCell>
+                          <TableCell className="btn-pending">Pending</TableCell>
                           <TableCell>
                             <img className="edit-img" src={EditIcon} alt="" />
                             <img className="edit-img" src={BinIcon} alt="" />
@@ -326,14 +220,8 @@ const InnerPage = () => {
                           <TableCell className="text-views">153</TableCell>
                           <TableCell className="text-favorites">0</TableCell>
                           <TableCell className="text-visit">9:23AM</TableCell>
-                          <TableCell>
-                            <Button
-                              type="button"
-                              variant="outlined"
-                              className="btn-completed"
-                            >
-                              Completed
-                            </Button>
+                          <TableCell className="btn-completed">
+                            Completed
                           </TableCell>
                           <TableCell>
                             <img className="edit-img" src={EditIcon} alt="" />
@@ -347,443 +235,391 @@ const InnerPage = () => {
                     <div className="pagination justify-content-start">
                       <h3 className="show-text">Show</h3>
                       <div className="select-div">
-                        <FormControl
-                          variant="filled"
-                          
-                        >
-                          <InputLabel id="demo-simple-select-filled-label">
-                            Age
-                          </InputLabel>
+                        <FormControl variant="filled">
                           <Select
-                            labelId="demo-simple-select-filled-label"
-                            id="demo-simple-select-filled"
-                            value={age}
+                            id="entry"
+                            value={select}
+                            className="select-entry"
                             onChange={handleChangeSelect}
                           >
-                            <MenuItem value="">
-                              <em>None</em>
-                            </MenuItem>
-                            <MenuItem value={10}>Ten</MenuItem>
-                            <MenuItem value={20}>Twenty</MenuItem>
-                            <MenuItem value={30}>Thirty</MenuItem>
+                            <MenuItem value={1}>1</MenuItem>
+                            <MenuItem value={2}>2</MenuItem>
+                            <MenuItem value={6}>6</MenuItem>
                           </Select>
                         </FormControl>
-                        
-                        <Form.Control
-                          as="select"
-                          defaultValue={6}
-                          className="select-entry"
-                          id="entry"
-                        >
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                          <option value="5">5</option>
-                          <option value="6">6</option>
-                        </Form.Control>
                       </div>
                       <h3 className="entry-text">Entries</h3>
                     </div>
-                    <Pagination className="justify-content-end">
-                      <Pagination.Item href="#">
-                        <img
-                          src={ChevronLeftIcon}
-                          alt=""
-                          className="chevron-left-img"
-                        />
-                      </Pagination.Item>
-                      <Pagination.Item href="#">1</Pagination.Item>
-                      <Pagination.Item active href="#">
-                        2
-                      </Pagination.Item>
-                      <Pagination.Item href="#">3</Pagination.Item>
-                      <Pagination.Item href="#">4</Pagination.Item>
-                      <Pagination.Item href="#">5</Pagination.Item>
-                      <Pagination.Item href="#">
-                        <img
-                          src={ChevronRightIcon}
-                          alt=""
-                          className="chevron-left-img"
-                        />
-                      </Pagination.Item>
-                    </Pagination>
+                    <Pagination
+                      className="justify-content-end"
+                      count={5}
+                      color="primary"
+                    />
                   </div>
                 </div>
               </div>
-            </div>
+            </Grid>
 
-            <div className="col-md-12">
+            <Grid item md={12} className="col-md-12">
               <div className="form-div content-box">
                 <div className="analytics-text">
                   <div className="analytics-border">FORM STYLE</div>
                 </div>
-                <Form>
-                  <div className="row">
-                    <div className="col-12">
+                <form>
+                  <Grid container>
+                    <Grid item xs={12} className="col-12">
                       <h3 className="one-column-head">One Column</h3>
-                    </div>
-                    <div className="col-12">
-                      <Form.Group>
-                        <Form.Label
+                    </Grid>
+                    <Grid item xs={12} className="col-12">
+                      <FormGroup>
+                        <FormLabel
                           className="one-column-label"
                           htmlFor="exampleInput"
                         >
                           {" "}
                           Textbox
-                        </Form.Label>
-                        <Form.Control type="text" id="exampleInput" />
-                      </Form.Group>
+                        </FormLabel>
+                        <TextField
+                          type="text"
+                          variant="filled"
+                          id="exampleInput"
+                        />
+                      </FormGroup>
                       <FormGroup>
-                        <Form.Label
+                        <FormLabel
                           className="one-column-label"
                           htmlFor="exampleInpuTableCellropdown"
                         >
                           Dropdown
-                        </Form.Label>
-                        <Form.Control
-                          as="select"
-                          className="custom-dropdown"
-                          id="exampleformControlSelect"
-                        >
-                          <option></option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                        </Form.Control>
+                        </FormLabel>
+                        <FormControl variant="filled">
+                          <DefaultSelect />
+                        </FormControl>
                       </FormGroup>
                       <FormGroup>
-                        <Form.Label
+                        <FormLabel
                           className="one-column-label"
                           htmlFor="exampleTextarea"
                         >
                           Textarea
-                        </Form.Label>
-                        <Form.Control
-                          as="textarea"
+                        </FormLabel>
+                        <TextareaAutosize
+                          rowsMin={2}
                           id="exampleTextarea"
-                        ></Form.Control>
+                        ></TextareaAutosize>
                       </FormGroup>
-                    </div>
-                  </div>
-                </Form>
+                    </Grid>
+                  </Grid>
+                </form>
 
-                <Form>
-                  <div className="row">
-                    <div className="col-12">
+                <form>
+                  <Grid container>
+                    <Grid item xs={12} className="col-12">
                       <h3 className="two-column-head">Two Column</h3>
-                    </div>
-                    <div className="col-md-6">
+                    </Grid>
+                    <Grid item md={6} className="col-md-6">
                       <FormGroup>
-                        <Form.Label
+                        <FormLabel
                           className="one-column-label"
                           htmlFor="exampleInput"
                         >
                           Textbox
-                        </Form.Label>
-                        <Form.Control type="text" id="exampleInput" />
+                        </FormLabel>
+                        <TextField
+                          variant="filled"
+                          type="text"
+                          id="exampleInput"
+                        />
                       </FormGroup>
 
                       <FormGroup>
-                        <Form.Label
+                        <FormLabel
                           className="one-column-label"
                           htmlFor="exampleInput"
                         >
                           Disabled
-                        </Form.Label>
-                        <Form.Control type="text" disabled id="exampleInput" />
+                        </FormLabel>
+                        <TextField
+                          variant="filled"
+                          type="text"
+                          id="exampleInput"
+                          disabled
+                        />
                       </FormGroup>
-                    </div>
-                    <div className="col-md-6">
+                    </Grid>
+                    <Grid item md={6} className="col-md-6">
                       <FormGroup>
-                        <Form.Label
+                        <FormLabel
                           className="two-column-label"
                           htmlFor="exampleInput"
                         >
                           Textbox
-                        </Form.Label>
-                        <Form.Control type="text" id="exampleInput" />
+                        </FormLabel>
+                        <TextField
+                          variant="filled"
+                          type="text"
+                          id="exampleInput"
+                        />
                       </FormGroup>
 
                       <FormGroup>
-                        <Form.Label
+                        <FormLabel
                           className="two-column-label"
                           htmlFor="exampleInput"
                         >
                           Focus
-                        </Form.Label>
-                        <Form.Control
+                        </FormLabel>
+                        <TextField
+                          variant="filled"
                           type="text"
-                          className="focus-input"
                           id="exampleInput"
                         />
                       </FormGroup>
-                    </div>
-                  </div>
-                </Form>
+                    </Grid>
+                  </Grid>
+                </form>
 
-                <Form>
-                  <div className="row">
-                    <div className="col-12">
+                <form>
+                  <Grid container>
+                    <Grid item xs={12} className="col-12">
                       <h3 className="three-column-head">Three Column</h3>
-                    </div>
-                    <div className="col-md-4">
+                    </Grid>
+                    <Grid item md={4} className="col-md-4">
                       <FormGroup>
-                        <Form.Label
+                        <FormLabel
                           className="one-column-label"
                           htmlFor="exampleInput"
                         >
                           Textbox
-                        </Form.Label>
-                        <Form.Control type="text" id="exampleInput" />
+                        </FormLabel>
+                        <TextField
+                          variant="filled"
+                          type="text"
+                          id="exampleInput"
+                        />
                       </FormGroup>
 
                       <FormGroup>
-                        <Form.Label
+                        <FormLabel
                           className="one-column-label"
                           htmlFor="exampleInpuTableCellropdown"
                         >
                           Dropdown
-                        </Form.Label>
-                        <Form.Control
-                          as="select"
-                          className=" custom-dropdown"
-                          id="exampleformControlSelect"
-                        >
-                          <option></option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                        </Form.Control>
+                        </FormLabel>
+                        <FormControl variant="filled">
+                          <DefaultSelect />
+                        </FormControl>
                       </FormGroup>
-                    </div>
-                    <div className="col-md-4">
+                    </Grid>
+                    <Grid item md={4} className="col-md-4">
                       <FormGroup>
-                        <Form.Label
+                        <FormLabel
                           className="two-column-label"
                           htmlFor="exampleInput"
                         >
                           Textbox
-                        </Form.Label>
-                        <Form.Control type="text" id="exampleInput" />
+                        </FormLabel>
+                        <TextField
+                          variant="filled"
+                          type="text"
+                          id="exampleInput"
+                        />
                       </FormGroup>
 
                       <FormGroup>
-                        <Form.Label
+                        <FormLabel
                           className="one-column-label"
                           htmlFor="exampleInpuTableCellropdown"
                         >
                           Dropdown
-                        </Form.Label>
-                        <Form.Control
-                          as="select"
-                          className="custom-dropdown"
-                          id="exampleformControlSelect"
-                        >
-                          <option></option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                        </Form.Control>
+                        </FormLabel>
+                        <FormControl variant="filled">
+                          <DefaultSelect />
+                        </FormControl>
                       </FormGroup>
-                    </div>
-                    <div className="col-md-4">
+                    </Grid>
+                    <Grid item md={4} className="col-md-4">
                       <FormGroup>
-                        <Form.Label
+                        <FormLabel
                           className="two-column-label"
                           htmlFor="exampleInput"
                         >
                           Textbox
-                        </Form.Label>
-                        <Form.Control type="text" id="exampleInput" />
+                        </FormLabel>
+                        <TextField
+                          variant="filled"
+                          type="text"
+                          id="exampleInput"
+                        />
                       </FormGroup>
 
                       <FormGroup>
-                        <Form.Label
+                        <FormLabel
                           className="one-column-label"
                           htmlFor="exampleInpuTableCellropdown"
                         >
                           Dropdown
-                        </Form.Label>
-                        <Form.Control
-                          as="select"
-                          className="custom-dropdown"
-                          id="exampleformControlSelect"
-                        >
-                          <option></option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                        </Form.Control>
+                        </FormLabel>
+                        <FormControl variant="filled">
+                          <DefaultSelect />
+                        </FormControl>
                       </FormGroup>
-                    </div>
-                  </div>
-                </Form>
+                    </Grid>
+                  </Grid>
+                </form>
 
-                <Form>
-                  <div className="row">
-                    <div className="col-12">
+                <form>
+                  <Grid container>
+                    <Grid item xs={12} className="col-12">
                       <h3 className="four-column-head">Four Column</h3>
-                    </div>
-                    <div className="col-md-3">
+                    </Grid>
+                    <Grid item md={3} className="col-md-3">
                       <FormGroup>
-                        <Form.Label
+                        <FormLabel
                           className="one-column-label"
                           htmlFor="exampleInput"
                         >
                           Textbox
-                        </Form.Label>
-                        <Form.Control type="text" id="exampleInput" />
+                        </FormLabel>
+                        <TextField
+                          variant="filled"
+                          type="text"
+                          id="exampleInput"
+                        />
                       </FormGroup>
 
                       <FormGroup>
-                        <Form.Label
+                        <FormLabel
                           className="one-column-label"
                           htmlFor="exampleInpuTableCellropdown"
                         >
                           Dropdown
-                        </Form.Label>
-                        <Form.Control
-                          as="select"
-                          className="custom-dropdown"
-                          id="exampleformControlSelect"
-                        >
-                          <option></option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                        </Form.Control>
+                        </FormLabel>
+                        <FormControl variant="filled">
+                          <DefaultSelect />
+                        </FormControl>
                       </FormGroup>
-                    </div>
-                    <div className="col-md-3">
+                    </Grid>
+                    <Grid item md={3} className="col-md-3">
                       <FormGroup>
-                        <Form.Label
+                        <FormLabel
                           className="two-column-label"
                           htmlFor="exampleInput"
                         >
                           Textbox
-                        </Form.Label>
-                        <Form.Control type="text" id="exampleInput" />
+                        </FormLabel>
+                        <TextField
+                          variant="filled"
+                          type="text"
+                          id="exampleInput"
+                        />
                       </FormGroup>
 
                       <FormGroup>
-                        <Form.Label
+                        <FormLabel
                           className="one-column-label"
                           htmlFor="exampleInpuTableCellropdown"
                         >
                           Dropdown
-                        </Form.Label>
-                        <Form.Control
-                          as="select"
-                          className="custom-dropdown"
-                          id="exampleformControlSelect"
-                        >
-                          <option></option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                        </Form.Control>
+                        </FormLabel>
+                        <FormControl variant="filled">
+                          <DefaultSelect />
+                        </FormControl>
                       </FormGroup>
-                    </div>
-                    <div className="col-md-3">
+                    </Grid>
+                    <Grid item md={3} className="col-md-3">
                       <FormGroup>
-                        <Form.Label
+                        <FormLabel
                           className="two-column-label"
                           htmlFor="exampleInput"
                         >
                           Textbox
-                        </Form.Label>
-                        <Form.Control type="text" id="exampleInput" />
+                        </FormLabel>
+                        <TextField
+                          variant="filled"
+                          type="text"
+                          id="exampleInput"
+                        />
                       </FormGroup>
 
                       <FormGroup>
-                        <label
+                        <FormLabel
                           className="one-column-label"
                           htmlFor="exampleInpuTableCellropdown"
                         >
                           Dropdown
-                        </label>
-                        <Form.Control
-                          as="select"
-                          className="custom-dropdown"
-                          id="exampleformControlSelect"
-                        >
-                          <option></option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                        </Form.Control>
+                        </FormLabel>
+                        <FormControl variant="filled">
+                          <DefaultSelect />
+                        </FormControl>
                       </FormGroup>
-                    </div>
-                    <div className="col-md-3">
+                    </Grid>
+                    <Grid item md={3} className="col-md-3">
                       <FormGroup>
-                        <Form.Label
+                        <FormLabel
                           className="two-column-label"
                           htmlFor="exampleInput"
                         >
                           Textbox
-                        </Form.Label>
-                        <Form.Control type="text" id="exampleInput" />
+                        </FormLabel>
+                        <TextField
+                          variant="filled"
+                          type="text"
+                          id="exampleInput"
+                        />
                       </FormGroup>
 
                       <FormGroup>
-                        <Form.Label
+                        <FormLabel
                           className="one-column-label"
                           htmlFor="exampleInpuTableCellropdown"
                         >
                           Dropdown
-                        </Form.Label>
-                        <Form.Control
-                          as="select"
-                          className="custom-dropdown"
-                          id="exampleformControlSelect"
-                        >
-                          <option></option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                        </Form.Control>
+                        </FormLabel>
+                        <FormControl variant="filled">
+                          <DefaultSelect />
+                        </FormControl>
                       </FormGroup>
-                    </div>
-                  </div>
-                </Form>
+                    </Grid>
+                  </Grid>
+                </form>
 
-                <Form>
-                  <div className="row">
-                    <div className="col-md-12">
+                <form>
+                  <Grid container>
+                    <Grid item md={12} className="col-md-12">
                       <h3 className="element-head">Other Elements</h3>
-                    </div>
+                    </Grid>
 
-                    <div className="col-md-12">
+                    <Grid item md={12} className="col-md-12">
                       <div className="file-upload">
                         <span className="form-label one-column-label">
                           File Upload:
                         </span>
 
-                        <Form.Label htmlFor="input-file">
+                        <FormLabel htmlFor="input-file">
                           <img
                             src={UploadIconWhite}
                             alt=""
                             className="upload-white-icon"
                           />{" "}
                           Upload
-                        </Form.Label>
-                        <Form.Control id="input-file" type="file" />
+                        </FormLabel>
+                        <TextField id="input-file" type="file" />
                       </div>
-                    </div>
+                    </Grid>
 
-                    <div className="col-md-12">
+                    <Grid item md={12} className="col-md-12">
                       <FormGroup>
-                        <Form.Label
+                        <FormLabel
                           className="checkbox-label"
                           htmlFor="exampleInput"
                         >
                           Check Boxes
-                        </Form.Label>
+                        </FormLabel>
                       </FormGroup>
-                    </div>
+                    </Grid>
 
-                    <div className="col-md-12">
+                    <Grid item md={12} className="col-md-12">
                       <FormGroup>
                         <div className="custom-Control custom-checkbox checkbox1">
                           <FormControlLabel
@@ -791,6 +627,7 @@ const InnerPage = () => {
                               <Checkbox
                                 checked={checked}
                                 color="primary"
+                                disableRipple={true}
                                 onChange={handleChangeCheckbox}
                               />
                             }
@@ -798,32 +635,40 @@ const InnerPage = () => {
                           />
                           <FormControlLabel
                             control={
-                              <Checkbox defaultChecked color="primary" />
+                              <Checkbox
+                                defaultChecked
+                                color="primary"
+                                disableRipple={true}
+                              />
                             }
                             label="Option 2"
                           />
                           <FormControlLabel
                             control={
-                              <Checkbox defaultChecked color="primary" />
+                              <Checkbox
+                                defaultChecked
+                                color="primary"
+                                disableRipple={true}
+                              />
                             }
                             label="Option 3"
                           />
                         </div>
                       </FormGroup>
-                    </div>
+                    </Grid>
 
-                    <div className="col-md-12">
+                    <Grid item md={12} className="col-md-12">
                       <FormGroup>
-                        <Form.Label
+                        <FormLabel
                           className="checkbox-label"
                           htmlFor="exampleInput"
                         >
                           Radio Buttons
-                        </Form.Label>
+                        </FormLabel>
                       </FormGroup>
-                    </div>
+                    </Grid>
 
-                    <div className="col-md-12">
+                    <Grid item md={12} className="col-md-12">
                       <FormGroup>
                         <div className="custom-Control custom-radio checkbox1">
                           <FormControlLabel
@@ -833,6 +678,7 @@ const InnerPage = () => {
                                 onChange={handleChangeRadio}
                                 color="primary"
                                 name="option"
+                                disableRipple={true}
                                 checked={radio === "option1"}
                               />
                             }
@@ -846,6 +692,7 @@ const InnerPage = () => {
                                 color="primary"
                                 checked={radio === "option2"}
                                 name="option"
+                                disableRipple={true}
                               />
                             }
                             label="Option 2"
@@ -857,6 +704,7 @@ const InnerPage = () => {
                                 onChange={handleChangeRadio}
                                 checked={radio === "option3"}
                                 color="primary"
+                                disableRipple={true}
                                 name="option"
                               />
                             }
@@ -864,41 +712,33 @@ const InnerPage = () => {
                           />
                         </div>
                       </FormGroup>
-                    </div>
+                    </Grid>
 
-                    <div className="col-md-12">
+                    <Grid item md={12} className="col-md-12">
                       <div className="button-element">
                         <Button
                           type="button"
                           variant="contained"
                           color="primary"
                           className="primary-btn"
+                          disableRipple={true}
                         >
                           Primary
                         </Button>
                         <Button
                           type="button"
                           variant="contained"
-                          color="secondary"
+                          color="default"
                           className="secondary-btn"
+                          disableRipple={true}
                         >
                           Secondary
                         </Button>
-                        <FormControlLabel
-                          control={
-                            <Switch
-                              checked={state.checkedSwitch}
-                              onChange={handleChange}
-                              name="checkedSwitch"
-                              color="primary"
-                            />
-                          }
-                          label="ON/OFF"
-                        />
+                        <DefaultSwitch leftlabel="OFF" rightlabel="ON" />
                       </div>
-                    </div>
+                    </Grid>
 
-                    <div className="col-md-12">
+                    <Grid item md={12} className="col-md-12">
                       <div className="alert-message">
                         {!showSuccess && (
                           <div>
@@ -906,6 +746,7 @@ const InnerPage = () => {
                               variant="contained"
                               className="mb-2 btn-success"
                               onClick={() => setShowSuccess(true)}
+                              disableRipple={true}
                             >
                               Show Success Alert
                             </Button>
@@ -936,6 +777,7 @@ const InnerPage = () => {
                               variant="contained"
                               className="btn-info mb-2"
                               onClick={() => setShowInfo(true)}
+                              disableRipple={true}
                             >
                               Show Info Alert
                             </Button>
@@ -966,6 +808,7 @@ const InnerPage = () => {
                               variant="contained"
                               className=" btn-warning mb-2"
                               onClick={() => setShowWarning(true)}
+                              disableRipple={true}
                             >
                               Show Warning Alert
                             </Button>
@@ -996,6 +839,7 @@ const InnerPage = () => {
                               variant="contained"
                               className="btn-danger mb-2"
                               onClick={() => setShowDanger(true)}
+                              disableRipple={true}
                             >
                               Show Danger Alert
                             </Button>
@@ -1024,57 +868,30 @@ const InnerPage = () => {
                           </Alert>
                         )}
                       </div>
-                    </div>
-                  </div>
-                </Form>
+                    </Grid>
+                  </Grid>
+                </form>
 
-                <div className="row">
-                  <div className="col-md-12">
+                <Grid container>
+                  <Grid item md={12} className="col-md-12">
                     <h3 className="tab-head">Tab Style</h3>
-                  </div>
-                  <div className="col-md-12">
-                    <Tabs
-                      value={value}
-                      onChange={handleChangeTab}
-                      indicatorColor="primary"
-                      textColor="primary"
-                      variant="scrollable"
-                      scrollButtons="auto"
-                      aria-label="scrollable auto tabs example"
-                    >
-                      <Tab label="Today's Orders" {...a11yProps(0)} />
-                      <Tab label="Scheduled" {...a11yProps(1)} />
-                      <Tab label="Completed" {...a11yProps(2)} />
-                      <Tab label="Cancelled" {...a11yProps(3)} />
-                    </Tabs>
-                    <TabPanel value={value} index={0}>
-                      Tab One
-                    </TabPanel>
-                    <TabPanel value={value} index={1}>
-                      Tab Two
-                    </TabPanel>
-                    <TabPanel value={value} index={2}>
-                      Tab Three
-                    </TabPanel>
-                    <TabPanel value={value} index={3}>
-                      Tab Four
-                    </TabPanel>
-                    <TabPanel value={value} index={4}>
-                      Tab Five
-                    </TabPanel>
-                  </div>
-                </div>
+                  </Grid>
+                  <Grid item md={12} className="col-md-12">
+                    <DefaultTabs />
+                  </Grid>
+                </Grid>
               </div>
-            </div>
+            </Grid>
 
-            <div className="col-md-12">
+            <Grid item md={12} className="col-md-12">
               <p className="innerpage-copyright">
                 Copyright 2021.All rights reserved.
                 <span className="span-career">Careers</span>
                 <span className="span-policy">Prviacy Policy</span>
               </p>
-            </div>
-          </div>
+            </Grid>
+            {/* </div> */}
+          </Grid>
         </div>
       </div>
     </div>
