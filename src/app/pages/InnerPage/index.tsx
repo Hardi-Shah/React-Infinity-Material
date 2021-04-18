@@ -55,7 +55,7 @@ const InnerPage = () => {
     setRadio((event.target as HTMLInputElement).value);
   };
 
-  const [select, setSelect] = useState("");
+  const [select, setSelect] = useState("6");
 
   const handleChangeSelect = (event: React.ChangeEvent<{ value: unknown }>) => {
     setSelect(event.target.value as string);
