@@ -6,10 +6,10 @@ import {
   ListItemText,
 } from "@material-ui/core";
 import React from "react";
-import { Dropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import {
   ChevronDownGreyIcon,
+  DownArrowIcon,
   LogoIcon,
   MenuIcon,
   NameLogoHIcon,
@@ -31,12 +31,19 @@ const Header = () => {
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
-  // const handleUserClick = (event: React.MouseEvent<HTMLElement>) => {
-  //   setAnchorEl(event.currentTarget);
-  // };
+
+  const [user, setUser] = React.useState<null | HTMLElement>(null);
+
+  const handleUserClick = (event: React.MouseEvent<HTMLElement>) => {
+    setUser(event.currentTarget);
+  };
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleUserClose = () => {
+    setUser(null);
   };
 
   function toggleNav() {
@@ -81,7 +88,7 @@ const Header = () => {
           <Menu
             anchorEl={anchorEl}
             keepMounted
-            className=" notifications"
+            className="notifications"
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
@@ -164,56 +171,90 @@ const Header = () => {
           </li>
           <li className="nav-item nav-item-mobile">
             <div className="founder-name">John Doe</div>
-            <Dropdown>
-              <Dropdown.Toggle as="span" className="founder-dropdown">
-                <Link className="founder-dropdown " to="#">
-                  Founder of app
+            {/* <Dropdown> */}
+            <span className="founder-dropdown">
+              <Link
+                className="founder-dropdown"
+                to="#"
+                onClick={handleUserClick}
+              >
+                Founder of app
+              </Link>
+              <img
+                src={DownArrowIcon}
+                alt=""
+                onClick={handleUserClick}
+                height="12px"
+                style={{ color: "#fff", marginBottom: "-3px" }}
+              />
+            </span>
+            <Menu
+              anchorEl={user}
+              keepMounted
+              className="user-notification"
+              open={Boolean(user)}
+              onClose={handleUserClose}
+            >
+              {/* <Dropdown.Menu as="span"> */}
+              {/* <div className="row"> */}
+              <ListItem alignItems="flex-start">
+                <Link className="dropdown-item user-dropdown" to="#">
+                  <div className="col-2">
+                    <img
+                      src={UserProfileIcon}
+                      alt="user-profile"
+                      height="18px"
+                    />
+                  </div>
+                  <div className="col-10">Profile</div>
                 </Link>
-              </Dropdown.Toggle>
-              <Dropdown.Menu as="span">
-                <div className="row">
-                  <Link className="dropdown-item user-dropdown" to="#">
-                    <div className="col-2">
-                      <img src={UserProfileIcon} alt="user-profile" />
-                    </div>
-                    <div className="col-10">Profile</div>
-                  </Link>
-                  <div>
-                    <Link className="dropdown-item user-dropdown" to="#">
-                      <div className="col-2">
-                        <img
-                          src={UserProfileSettingIcon}
-                          alt="user-profile-seting"
-                        />
-                      </div>
-                      <div className="col-10">Settings</div>
-                    </Link>
+              </ListItem>
+              <ListItem alignItems="flex-start">
+                {/* <div> */}
+                <Link className="dropdown-item user-dropdown" to="#">
+                  <div className="col-2">
+                    <img
+                      src={UserProfileSettingIcon}
+                      alt="user-profile-seting"
+                      height="18px"
+                    />
                   </div>
-                  <div>
-                    <Link className="dropdown-item user-dropdown" to="#">
-                      <div className="col-2">
-                        <img
-                          src={UserProfilePasswordIcon}
-                          alt="user-profile-password"
-                        />
-                      </div>
-                      <div className="col-10">Change Password</div>
-                    </Link>
+                  <div className="col-10">Settings</div>
+                </Link>
+              </ListItem>
+              {/* </div> */}
+              {/* <div> */}
+              <ListItem alignItems="flex-start">
+                <Link className="dropdown-item user-dropdown" to="#">
+                  <div className="col-2">
+                    <img
+                      src={UserProfilePasswordIcon}
+                      alt="user-profile-password"
+                      height="18px"
+                    />
                   </div>
-                  <div>
-                    <Link className="dropdown-item user-dropdown" to="/">
-                      <div className="col-2">
-                        <img
-                          src={UserProfileLogoutIcon}
-                          alt="user-profile-logout"
-                        />
-                      </div>
-                      <div className="col-10">Logout</div>
-                    </Link>
+                  <div className="col-10">Change Password</div>
+                </Link>
+              </ListItem>
+              {/* </div> */}
+              {/* <div> */}
+              <ListItem alignItems="flex-start">
+                <Link className="dropdown-item user-dropdown" to="/">
+                  <div className="col-2">
+                    <img
+                      src={UserProfileLogoutIcon}
+                      alt="user-profile-logout"
+                      height="18px"
+                    />
                   </div>
-                </div>
-              </Dropdown.Menu>
-            </Dropdown>
+                  <div className="col-10">Logout</div>
+                </Link>
+              </ListItem>
+              {/* </div> */}
+              {/* </div> */}
+            </Menu>
+            {/* </Dropdown.Menu> */}
+            {/* </Dropdown> */}
           </li>
         </ul>
       </div>
