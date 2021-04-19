@@ -15,7 +15,6 @@ import {
   MenuItem,
   FormLabel,
   TextField,
-  TextareaAutosize,
 } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import Pagination from "@material-ui/lab/Pagination";
@@ -76,11 +75,8 @@ const InnerPage = () => {
       <div id="main">
         <div className="dashboard-content">
           <Grid container>
-            {/* <div className="row"> */}
-            {/* <div className="col-md-12"> */}
             <Grid item md={12} className="col-md-12">
               <h3 className="innerpage-text">innerpage</h3>
-              {/* </div> */}
             </Grid>
 
             <Grid item md={12} className="col-md-12">
@@ -232,9 +228,11 @@ const InnerPage = () => {
                     </Table>
                   </TableContainer>
                   <div className="main-pagination">
-                    <div className="pagination justify-content-start">
-                      <h3 className="show-text">Show</h3>
-                      <div className="select-div">
+                    <div className="records-entry">
+                      <span>
+                        <h2 className="pt-3">Show</h2>
+                      </span>
+                      <span className="select-div">
                         <FormControl variant="filled">
                           <Select
                             id="entry"
@@ -247,13 +245,16 @@ const InnerPage = () => {
                             <MenuItem value={6}>6</MenuItem>
                           </Select>
                         </FormControl>
-                      </div>
-                      <h3 className="entry-text">Entries</h3>
+                      </span>
+                      <span>
+                        <h3 className="pt-3">Entries</h3>
+                      </span>
                     </div>
+
                     <Pagination
-                      className="justify-content-end"
                       count={5}
                       color="primary"
+                      className="pagination-nav"
                     />
                   </div>
                 </div>
@@ -272,41 +273,24 @@ const InnerPage = () => {
                     </Grid>
                     <Grid item xs={12} className="col-12">
                       <FormGroup>
-                        <FormLabel
-                          className="one-column-label"
-                          htmlFor="exampleInput"
-                        >
-                          {" "}
-                          Textbox
-                        </FormLabel>
                         <TextField
                           type="text"
                           variant="filled"
                           id="exampleInput"
+                          label="Textbox"
                         />
                       </FormGroup>
                       <FormGroup>
-                        <FormLabel
-                          className="one-column-label"
-                          htmlFor="exampleInpuTableCellropdown"
-                        >
-                          Dropdown
-                        </FormLabel>
-                        <FormControl variant="filled">
-                          <DefaultSelect />
-                        </FormControl>
+                        <DefaultSelect />
                       </FormGroup>
                       <FormGroup>
-                        <FormLabel
-                          className="one-column-label"
-                          htmlFor="exampleTextarea"
-                        >
-                          Textarea
-                        </FormLabel>
-                        <TextareaAutosize
-                          rowsMin={2}
+                        <TextField
+                          className="form-textarea"
                           id="exampleTextarea"
-                        ></TextareaAutosize>
+                          type="textarea"
+                          label="Textarea"
+                          variant="filled"
+                        ></TextField>
                       </FormGroup>
                     </Grid>
                   </Grid>
@@ -319,29 +303,19 @@ const InnerPage = () => {
                     </Grid>
                     <Grid item md={6} className="col-md-6">
                       <FormGroup>
-                        <FormLabel
-                          className="one-column-label"
-                          htmlFor="exampleInput"
-                        >
-                          Textbox
-                        </FormLabel>
                         <TextField
                           variant="filled"
                           type="text"
                           id="exampleInput"
+                          label="Textbox"
                         />
                       </FormGroup>
 
                       <FormGroup>
-                        <FormLabel
-                          className="one-column-label"
-                          htmlFor="exampleInput"
-                        >
-                          Disabled
-                        </FormLabel>
                         <TextField
                           variant="filled"
                           type="text"
+                          label="Disabled"
                           id="exampleInput"
                           disabled
                         />
@@ -349,30 +323,20 @@ const InnerPage = () => {
                     </Grid>
                     <Grid item md={6} className="col-md-6">
                       <FormGroup>
-                        <FormLabel
-                          className="two-column-label"
-                          htmlFor="exampleInput"
-                        >
-                          Textbox
-                        </FormLabel>
                         <TextField
                           variant="filled"
                           type="text"
                           id="exampleInput"
+                          label="Textbox"
                         />
                       </FormGroup>
 
                       <FormGroup>
-                        <FormLabel
-                          className="two-column-label"
-                          htmlFor="exampleInput"
-                        >
-                          Focus
-                        </FormLabel>
                         <TextField
                           variant="filled"
                           type="text"
                           id="exampleInput"
+                          label="Focus"
                         />
                       </FormGroup>
                     </Grid>
@@ -386,83 +350,44 @@ const InnerPage = () => {
                     </Grid>
                     <Grid item md={4} className="col-md-4">
                       <FormGroup>
-                        <FormLabel
-                          className="one-column-label"
-                          htmlFor="exampleInput"
-                        >
-                          Textbox
-                        </FormLabel>
                         <TextField
                           variant="filled"
                           type="text"
                           id="exampleInput"
+                          label="Textbox"
                         />
                       </FormGroup>
 
                       <FormGroup>
-                        <FormLabel
-                          className="one-column-label"
-                          htmlFor="exampleInpuTableCellropdown"
-                        >
-                          Dropdown
-                        </FormLabel>
-                        <FormControl variant="filled">
-                          <DefaultSelect />
-                        </FormControl>
+                        <DefaultSelect />
                       </FormGroup>
                     </Grid>
                     <Grid item md={4} className="col-md-4">
                       <FormGroup>
-                        <FormLabel
-                          className="two-column-label"
-                          htmlFor="exampleInput"
-                        >
-                          Textbox
-                        </FormLabel>
                         <TextField
                           variant="filled"
                           type="text"
                           id="exampleInput"
+                          label="Textbox"
                         />
                       </FormGroup>
 
                       <FormGroup>
-                        <FormLabel
-                          className="one-column-label"
-                          htmlFor="exampleInpuTableCellropdown"
-                        >
-                          Dropdown
-                        </FormLabel>
-                        <FormControl variant="filled">
-                          <DefaultSelect />
-                        </FormControl>
+                        <DefaultSelect />
                       </FormGroup>
                     </Grid>
                     <Grid item md={4} className="col-md-4">
                       <FormGroup>
-                        <FormLabel
-                          className="two-column-label"
-                          htmlFor="exampleInput"
-                        >
-                          Textbox
-                        </FormLabel>
                         <TextField
                           variant="filled"
                           type="text"
                           id="exampleInput"
+                          label="Textbox"
                         />
                       </FormGroup>
 
                       <FormGroup>
-                        <FormLabel
-                          className="one-column-label"
-                          htmlFor="exampleInpuTableCellropdown"
-                        >
-                          Dropdown
-                        </FormLabel>
-                        <FormControl variant="filled">
-                          <DefaultSelect />
-                        </FormControl>
+                        <DefaultSelect />
                       </FormGroup>
                     </Grid>
                   </Grid>
@@ -475,110 +400,58 @@ const InnerPage = () => {
                     </Grid>
                     <Grid item md={3} className="col-md-3">
                       <FormGroup>
-                        <FormLabel
-                          className="one-column-label"
-                          htmlFor="exampleInput"
-                        >
-                          Textbox
-                        </FormLabel>
                         <TextField
                           variant="filled"
                           type="text"
                           id="exampleInput"
+                          label="Textbox"
                         />
                       </FormGroup>
 
                       <FormGroup>
-                        <FormLabel
-                          className="one-column-label"
-                          htmlFor="exampleInpuTableCellropdown"
-                        >
-                          Dropdown
-                        </FormLabel>
-                        <FormControl variant="filled">
-                          <DefaultSelect />
-                        </FormControl>
+                        <DefaultSelect />
                       </FormGroup>
                     </Grid>
                     <Grid item md={3} className="col-md-3">
                       <FormGroup>
-                        <FormLabel
-                          className="two-column-label"
-                          htmlFor="exampleInput"
-                        >
-                          Textbox
-                        </FormLabel>
                         <TextField
                           variant="filled"
                           type="text"
                           id="exampleInput"
+                          label="Textbox"
                         />
                       </FormGroup>
 
                       <FormGroup>
-                        <FormLabel
-                          className="one-column-label"
-                          htmlFor="exampleInpuTableCellropdown"
-                        >
-                          Dropdown
-                        </FormLabel>
-                        <FormControl variant="filled">
-                          <DefaultSelect />
-                        </FormControl>
+                        <DefaultSelect />
                       </FormGroup>
                     </Grid>
                     <Grid item md={3} className="col-md-3">
                       <FormGroup>
-                        <FormLabel
-                          className="two-column-label"
-                          htmlFor="exampleInput"
-                        >
-                          Textbox
-                        </FormLabel>
                         <TextField
                           variant="filled"
                           type="text"
                           id="exampleInput"
+                          label="Textbox"
                         />
                       </FormGroup>
 
                       <FormGroup>
-                        <FormLabel
-                          className="one-column-label"
-                          htmlFor="exampleInpuTableCellropdown"
-                        >
-                          Dropdown
-                        </FormLabel>
-                        <FormControl variant="filled">
-                          <DefaultSelect />
-                        </FormControl>
+                        <DefaultSelect />
                       </FormGroup>
                     </Grid>
                     <Grid item md={3} className="col-md-3">
                       <FormGroup>
-                        <FormLabel
-                          className="two-column-label"
-                          htmlFor="exampleInput"
-                        >
-                          Textbox
-                        </FormLabel>
                         <TextField
                           variant="filled"
                           type="text"
                           id="exampleInput"
+                          label="Textbox"
                         />
                       </FormGroup>
 
                       <FormGroup>
-                        <FormLabel
-                          className="one-column-label"
-                          htmlFor="exampleInpuTableCellropdown"
-                        >
-                          Dropdown
-                        </FormLabel>
-                        <FormControl variant="filled">
-                          <DefaultSelect />
-                        </FormControl>
+                        <DefaultSelect />
                       </FormGroup>
                     </Grid>
                   </Grid>
@@ -890,7 +763,6 @@ const InnerPage = () => {
                 <span className="span-policy">Prviacy Policy</span>
               </p>
             </Grid>
-            {/* </div> */}
           </Grid>
         </div>
       </div>

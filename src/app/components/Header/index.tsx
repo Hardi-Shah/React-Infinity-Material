@@ -4,6 +4,7 @@ import {
   Divider,
   ListItem,
   ListItemText,
+  Grid,
 } from "@material-ui/core";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -92,62 +93,72 @@ const Header = () => {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            {/* <List> */}
             <div className="notification-heading">Notifications</div>
-            <ListItem alignItems="flex-start">
-              <img
-                alt="user-01"
-                className="founder-logo"
-                src={UserImage01Icon}
-              />
-              <ListItemText>
-                <div className="notification-message">
-                  Suzzeth Bungaos tagged you and 18 others in a post
-                </div>
-                <div className="notification-time">Oct 3, 2017 9:00 PM</div>
-              </ListItemText>
+
+            <ListItem alignItems="flex-start" className="notification-link">
+              <Link className="notification-dropdown" to="#">
+                <img
+                  alt="user-01"
+                  className="founder-logo"
+                  src={UserImage01Icon}
+                />
+                <ListItemText>
+                  <div className="notification-message">
+                    Suzzeth Bungaos tagged you and 18 others in a post
+                  </div>
+                  <div className="notification-time">Oct 3, 2017 9:00 PM</div>
+                </ListItemText>
+              </Link>
             </ListItem>
             <Divider component="li" />
-            <ListItem alignItems="flex-start">
-              <img
-                alt="user-02"
-                className="founder-logo"
-                src={UserImage02Icon}
-              />
-              <ListItemText>
-                <div className="notification-message">
-                  Suzzeth Bungaos tagged you and 18 others in a post
-                </div>
-                <div className="notification-time">Oct 3, 2017 9:00 PM</div>
-              </ListItemText>
+
+            <ListItem alignItems="flex-start" className="notification-link">
+              <Link className="notification-dropdown" to="#">
+                <img
+                  alt="user-02"
+                  className="founder-logo"
+                  src={UserImage02Icon}
+                />
+                <ListItemText>
+                  <div className="notification-message">
+                    Suzzeth Bungaos tagged you and 18 others in a post
+                  </div>
+                  <div className="notification-time">Oct 3, 2017 9:00 PM</div>
+                </ListItemText>
+              </Link>
             </ListItem>
             <Divider component="li" />
-            <ListItem alignItems="flex-start">
-              <img
-                alt="user-03"
-                className="founder-logo"
-                src={UserImage03Icon}
-              />
-              <ListItemText>
-                <div className="notification-message">
-                  Suzzeth Bungaos tagged you and 18 others in a post
-                </div>
-                <div className="notification-time">Oct 3, 2017 9:00 PM</div>
-              </ListItemText>
+
+            <ListItem alignItems="flex-start" className="notification-link">
+              <Link className="notification-dropdown" to="#">
+                <img
+                  alt="user-03"
+                  className="founder-logo"
+                  src={UserImage03Icon}
+                />
+                <ListItemText>
+                  <div className="notification-message">
+                    Suzzeth Bungaos tagged you and 18 others in a post
+                  </div>
+                  <div className="notification-time">Oct 3, 2017 9:00 PM</div>
+                </ListItemText>
+              </Link>
             </ListItem>
             <Divider component="li" />
-            <ListItem alignItems="flex-start">
-              <img
-                alt="user-04"
-                className="founder-logo"
-                src={UserImage04Icon}
-              />
-              <ListItemText>
-                <div className="notification-message">
-                  Suzzeth Bungaos tagged you and 18 others in a post
-                </div>
-                <div className="notification-time">Oct 3, 2017 9:00 PM</div>
-              </ListItemText>
+            <ListItem alignItems="flex-start" className="notification-link">
+              <Link className="notification-dropdown" to="#">
+                <img
+                  alt="user-04"
+                  className="founder-logo"
+                  src={UserImage04Icon}
+                />
+                <ListItemText>
+                  <div className="notification-message">
+                    Suzzeth Bungaos tagged you and 18 others in a post
+                  </div>
+                  <div className="notification-time">Oct 3, 2017 9:00 PM</div>
+                </ListItemText>
+              </Link>
             </ListItem>
             <Divider component="li" />
 
@@ -171,8 +182,7 @@ const Header = () => {
           </li>
           <li className="nav-item nav-item-mobile">
             <div className="founder-name">John Doe</div>
-            {/* <Dropdown> */}
-            <span className="founder-dropdown">
+            <span className="founder">
               <Link
                 className="founder-dropdown"
                 to="#"
@@ -184,8 +194,7 @@ const Header = () => {
                 src={DownArrowIcon}
                 alt=""
                 onClick={handleUserClick}
-                height="12px"
-                style={{ color: "#fff", marginBottom: "-3px" }}
+                className="down-arrow"
               />
             </span>
             <Menu
@@ -195,66 +204,58 @@ const Header = () => {
               open={Boolean(user)}
               onClose={handleUserClose}
             >
-              {/* <Dropdown.Menu as="span"> */}
-              {/* <div className="row"> */}
-              <ListItem alignItems="flex-start">
-                <Link className="dropdown-item user-dropdown" to="#">
-                  <div className="col-2">
-                    <img
-                      src={UserProfileIcon}
-                      alt="user-profile"
-                      height="18px"
-                    />
-                  </div>
-                  <div className="col-10">Profile</div>
-                </Link>
-              </ListItem>
-              <ListItem alignItems="flex-start">
-                {/* <div> */}
-                <Link className="dropdown-item user-dropdown" to="#">
-                  <div className="col-2">
-                    <img
-                      src={UserProfileSettingIcon}
-                      alt="user-profile-seting"
-                      height="18px"
-                    />
-                  </div>
-                  <div className="col-10">Settings</div>
-                </Link>
-              </ListItem>
-              {/* </div> */}
-              {/* <div> */}
-              <ListItem alignItems="flex-start">
-                <Link className="dropdown-item user-dropdown" to="#">
-                  <div className="col-2">
-                    <img
-                      src={UserProfilePasswordIcon}
-                      alt="user-profile-password"
-                      height="18px"
-                    />
-                  </div>
-                  <div className="col-10">Change Password</div>
-                </Link>
-              </ListItem>
-              {/* </div> */}
-              {/* <div> */}
-              <ListItem alignItems="flex-start">
-                <Link className="dropdown-item user-dropdown" to="/">
-                  <div className="col-2">
-                    <img
-                      src={UserProfileLogoutIcon}
-                      alt="user-profile-logout"
-                      height="18px"
-                    />
-                  </div>
-                  <div className="col-10">Logout</div>
-                </Link>
-              </ListItem>
-              {/* </div> */}
-              {/* </div> */}
+              <Grid container>
+                <ListItem alignItems="flex-start" className="notification-link">
+                  <Link className="user-dropdown" to="#">
+                    <Grid item className="col-2">
+                      <img src={UserProfileIcon} alt="user-profile" />
+                    </Grid>
+                    <Grid item className="col-10">
+                      Profile
+                    </Grid>
+                  </Link>
+                </ListItem>
+                <ListItem alignItems="flex-start" className="notification-link">
+                  <Link className="user-dropdown" to="#">
+                    <Grid item className="col-2">
+                      <img
+                        src={UserProfileSettingIcon}
+                        alt="user-profile-seting"
+                      />
+                    </Grid>
+                    <Grid item className="col-10">
+                      Settings
+                    </Grid>
+                  </Link>
+                </ListItem>
+                <ListItem alignItems="flex-start" className="notification-link">
+                  <Link className="user-dropdown" to="#">
+                    <Grid item className="col-2">
+                      <img
+                        src={UserProfilePasswordIcon}
+                        alt="user-profile-password"
+                      />
+                    </Grid>
+                    <Grid item className="col-10 password">
+                      Change Password
+                    </Grid>
+                  </Link>
+                </ListItem>
+                <ListItem alignItems="flex-start" className="notification-link">
+                  <Link className="user-dropdown" to="/">
+                    <Grid item className="col-2">
+                      <img
+                        src={UserProfileLogoutIcon}
+                        alt="user-profile-logout"
+                      />
+                    </Grid>
+                    <Grid item className="col-10">
+                      Logout
+                    </Grid>
+                  </Link>
+                </ListItem>
+              </Grid>
             </Menu>
-            {/* </Dropdown.Menu> */}
-            {/* </Dropdown> */}
           </li>
         </ul>
       </div>

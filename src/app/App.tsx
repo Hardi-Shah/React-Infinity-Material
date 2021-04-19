@@ -10,15 +10,15 @@ function App() {
       "fontFamily": `"Raleway", sans-serif`,
       "fontSize": 14,
     },
-    // breakpoints: {
-    //   values: {
-    //     xs: 0,
-    //     sm: 576,
-    //     md: 992,
-    //     lg: 1025,
-    //     xl: 1199,
-    //   },
-    // },
+    breakpoints: {
+      values: {
+        xs: 0,
+        sm: 576,
+        md: 992,
+        lg: 1025,
+        xl: 1199,
+      },
+    },
   })
   return (
     <MuiThemeProvider theme={theme}>
